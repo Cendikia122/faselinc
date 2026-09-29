@@ -15,10 +15,10 @@ CREATE TABLE IF NOT EXISTS `admin_users` (
   `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Default login: admin / admin123
+-- Default login: admin / suksesmuliaBUL123
 INSERT INTO `admin_users` (`username`, `password`, `name`) 
-VALUES ('admin', '$2b$10$V1GeIfehPWbOfWYw1IEfT.XJwoBrdrpy.xxs44UPTQnMV9y6mD8Qa', 'Admin Fasel Consulting')
-ON DUPLICATE KEY UPDATE `username`=`username`;
+VALUES ('admin', '$2b$10$t1/spFrdJFU1R8Og9z3gjeBICoNdbQ1H029yplkHL31sDgsTrP4iq', 'Admin Fasel Consulting')
+ON DUPLICATE KEY UPDATE `password`=VALUES(`password`);
 
 -- -----------------------------------------------------
 -- Table: blogs
