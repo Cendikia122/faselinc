@@ -8,24 +8,49 @@ export default function AdminDashboardPage() {
   const [blogs, setBlogs] = useState([]);
   const [events, setEvents] = useState([]);
   const [dataSource, setDataSource] = useState("loading");
+  const [dbStatus, setDbStatus] = useState(null);
+  const [checkingDb, setCheckingDb] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  async function checkDbConnection() {
+    setCheckingDb(true);
+    try {
+      const res = await adminFetch("/api/db-status");
+      const data = await res.json();
+      setDbStatus(data);
+      if (data.connected) {
+        setDataSource("mysql");
+      }
+    } catch (e) {
+      console.warn("Could not check db status", e);
+    } finally {
+      setCheckingDb(false);
+    }
+  }
 
   useEffect(() => {
     async function loadData() {
       try {
-        const [blogRes, eventRes] = await Promise.all([
-          adminFetch("/api/blogs"),
-          adminFetch("/api/events"),
+        const [blogRes, eventRes, dbRes] = await Promise.all([
+          adminFetch("/api/blogs?all=true"),
+          adminFetch("/api/events?all=true"),
+          adminFetch("/api/db-status"),
         ]);
         const blogData = await blogRes.json();
         const eventData = await eventRes.json();
+        const dbData = await dbRes.json();
 
         if (blogData.success) {
           setBlogs(blogData.data || []);
-          setDataSource(blogData.source || "mysql");
         }
         if (eventData.success) {
           setEvents(eventData.data || []);
+        }
+        if (dbData.success) {
+          setDbStatus(dbData);
+          setDataSource(dbData.connected ? "mysql" : (blogData.source || "json"));
+        } else {
+          setDataSource(blogData.source || "json");
         }
       } catch (err) {
         console.error("Error loading dashboard data:", err);
@@ -36,34 +61,68 @@ export default function AdminDashboardPage() {
     loadData();
   }, []);
 
+  const isConnected = dataSource === "mysql" || dbStatus?.connected;
+
   return (
     <AdminLayout title="Dashboard Overview">
       {/* Status Alert Banner */}
-      <div className="alert alert-info border-0 shadow-sm d-flex align-items-center justify-content-between mb-4">
-        <div className="d-flex align-items-center gap-3">
-          <i className="fas fa-database fa-2x text-primary"></i>
-          <div>
-            <h6 className="mb-0 fw-bold">Status Penyimpanan Data</h6>
-            <small className="text-muted">
-              {dataSource === "mysql" ? (
-                <span className="text-success fw-bold">
-                  <i className="fas fa-check-circle me-1"></i> Terhubung langsung ke Database MySQL
-                </span>
-              ) : (
-                <span className="text-warning fw-bold">
-                  <i className="fas fa-exclamation-triangle me-1"></i> Mode Offline / JSON Fallback (Database MySQL belum dikonfigurasi)
-                </span>
-              )}
-            </small>
+      <div className={`alert ${isConnected ? 'alert-success' : 'alert-warning'} border-0 shadow-sm mb-4`}>
+        <div className="d-flex align-items-center justify-content-between flex-wrap gap-3">
+          <div className="d-flex align-items-center gap-3">
+            <i className={`fas fa-database fa-2x ${isConnected ? 'text-success' : 'text-warning'}`}></i>
+            <div>
+              <h6 className="mb-0 fw-bold">Status Penyimpanan Data</h6>
+              <div className="small mt-1">
+                {isConnected ? (
+                  <span className="text-success fw-bold">
+                    <i className="fas fa-check-circle me-1"></i> Terhubung langsung ke Database MySQL Hostinger ({dbStatus?.config?.host || 'Hostinger'})
+                  </span>
+                ) : (
+                  <div>
+                    <span className="text-dark fw-bold">
+                      <i className="fas fa-exclamation-triangle text-warning me-1"></i> Mode Offline / JSON Fallback
+                    </span>
+                    <span className="text-muted ms-2">
+                      {dbStatus?.config?.isDefaultHost 
+                        ? "(Variabel DB_HOST Hostinger belum dipasang di Vercel Environment Variables)"
+                        : dbStatus?.error 
+                          ? `(Error koneksi: ${dbStatus.error})` 
+                          : "(Database Hostinger belum terhubung)"}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="d-flex align-items-center gap-2">
+            <button
+              onClick={checkDbConnection}
+              disabled={checkingDb}
+              className="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1 bg-white"
+            >
+              <i className={`fas fa-sync-alt ${checkingDb ? 'fa-spin' : ''}`}></i>
+              {checkingDb ? "Memeriksa..." : "Tes Ulang Koneksi"}
+            </button>
+            <a
+              href="/database.sql"
+              download
+              className="btn btn-outline-dark btn-sm d-flex align-items-center gap-1 bg-white"
+            >
+              <i className="fas fa-download"></i> Unduh database.sql
+            </a>
           </div>
         </div>
-        <a
-          href="/database.sql"
-          download
-          className="btn btn-outline-dark btn-sm d-flex align-items-center gap-1"
-        >
-          <i className="fas fa-download"></i> Unduh database.sql
-        </a>
+
+        {!isConnected && (
+          <div className="mt-3 pt-3 border-top border-warning-subtle small text-dark">
+            <strong>Cara Menghubungkan ke Hostinger MySQL:</strong>
+            <ol className="mb-1 mt-1 ps-3">
+              <li>Pastikan di <strong>Hostinger hPanel &rarr; Databases &rarr; Remote MySQL</strong> sudah dibuat izin akses dengan IP: <code>%</code> (Semua Host).</li>
+              <li>Buka <strong>Vercel &rarr; Settings &rarr; Environment Variables</strong>, lalu masukkan <code>DB_HOST</code> (<code>srv1762.hstgr.io</code>), <code>DB_USER</code>, <code>DB_PASSWORD</code>, <code>DB_NAME</code>, dan <code>ADMIN_PASSWORD</code>.</li>
+              <li>Lakukan <strong>Redeploy</strong> di Vercel agar Environment Variables tersebut aktif.</li>
+            </ol>
+          </div>
+        )}
       </div>
 
       {/* Metrics Cards */}

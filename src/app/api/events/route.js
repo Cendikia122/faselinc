@@ -7,8 +7,9 @@ export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')) : null;
+    const all = searchParams.get('all') === 'true';
 
-    const result = await getEvents(limit);
+    const result = await getEvents(limit, all);
     return NextResponse.json({
       success: true,
       source: result.source,

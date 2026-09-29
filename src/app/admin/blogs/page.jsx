@@ -13,7 +13,7 @@ export default function AdminBlogsPage() {
   const fetchBlogs = async () => {
     try {
       setLoading(true);
-      const res = await adminFetch("/api/blogs");
+      const res = await adminFetch("/api/blogs?all=true");
       const data = await res.json();
       if (data.success) {
         setBlogs(data.data || []);
