@@ -1,19 +1,5 @@
 [
   {
-    "id": 4,
-    "title": "Leadforward leadership",
-    "tag": "Experiential Learning Approach",
-    "thumb": "/assets/img/uploads/balaikota_1790689139897.jpg",
-    "date": "Pendaftaran Terbuka",
-    "location": "Bogor, Jawa Barat",
-    "short_desc": "Tes",
-    "description": "tes",
-    "btn_text": "Daftar Sekarang",
-    "btn_link": "https://wa.me/6281298319944",
-    "status": "active",
-    "created_at": "2026-09-29T13:39:17.434Z"
-  },
-  {
     "id": 1,
     "title": "FASEL Crafting Collaboration & Core Values",
     "tag": "Experiential Learning Approach",

@@ -5,29 +5,25 @@ const MainMenu = ({ toggleSubMenu, navbarPlacement }) => {
     return (
         <>
             <ul className={`nav navbar-nav ${navbarPlacement}`} data-in="fadeInDown" data-out="fadeOutUp">
+                <li><Link href="/">Beranda</Link></li>
                 <li className="dropdown">
-                    <Link href="#" className="dropdown-toggle" data-toggle="dropdown" onClick={toggleSubMenu}>Pages</Link>
+                    <Link href="/about-us" className="dropdown-toggle" data-toggle="dropdown" onClick={toggleSubMenu}>Tentang Kami</Link>
                     <ul className="dropdown-menu">
-                        <li><Link href="/about-us">About Us</Link></li>
-                        <li><Link href="/team">Team</Link></li>
-                        <li><Link href="/team-details/1">Team Details</Link></li>
+                        <li><Link href="/about-us">Profil Fasel Consulting</Link></li>
+                        <li><Link href="/team">Tim Fasilitator & Trainer</Link></li>
                     </ul>
                 </li>
                 <li className="dropdown">
-                    <Link href="project" className="dropdown-toggle" data-toggle="dropdown" onClick={toggleSubMenu}>Projects</Link>
+                    <Link href="/events" className="dropdown-toggle" data-toggle="dropdown" onClick={toggleSubMenu}>Pelatihan & Event</Link>
                     <ul className="dropdown-menu">
-                        <li><Link href="/project">Training</Link></li>
-                        <li><Link href="/project-details/1">Events</Link></li>
+                        <li><Link href="/events">Semua Pelatihan & Event</Link></li>
+                        <li><Link href="/events">Experiential Learning</Link></li>
+                        <li><Link href="/events">Leadership Camp</Link></li>
                     </ul>
                 </li>
-                <li className="dropdown">
-                    <Link href="#" className="dropdown-toggle" data-toggle="dropdown" onClick={toggleSubMenu}>Services</Link>
-                    <ul className="dropdown-menu">
-                        <li><Link href="/services">Our Services</Link></li>
-                    </ul>
-                </li>
-                <li><Link href="/contact-us">Contact Us</Link></li>
-                <li><Link href="/blog">Blog</Link></li>
+                <li><Link href="/services">Layanan</Link></li>
+                <li><Link href="/blog">Blog & Wawasan</Link></li>
+                <li><Link href="/contact-us">Hubungi Kami</Link></li>
             </ul>
         </>
     );

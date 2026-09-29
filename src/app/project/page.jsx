@@ -1,19 +1,10 @@
-import LayoutStyle7 from '@/components/Layouts/LayoutStyle7';
-import ProjectStyle2 from '@/components/project/ProjectStyle2';
-import React from 'react';
+import EventsListingPage from '../events/page';
 
 export const metadata = {
-    title: "Fasel, Inc - Project Album"
-}
-
-const ProjectPage = () => {
-    return (
-        <>
-            <LayoutStyle7 breadCrumb="Training" title="Training - Album">
-                <ProjectStyle2 />
-            </LayoutStyle7>
-        </>
-    );
+  title: "Pelatihan & Event Experiential Learning | Fasel Consulting",
+  description: "Daftar jadwal program pelatihan kepemimpinan, experiential learning, team building, dan leadership development program dari Fasel Consulting.",
 };
 
-export default ProjectPage;
+export default function ProjectPage() {
+  return <EventsListingPage />;
+}

@@ -1,28 +1,36 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import LayoutStyle7 from "@/components/Layouts/LayoutStyle7";
 import Link from "next/link";
+import { getBlogs } from "@/lib/storage";
 
-export default function BlogListingPage() {
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
+export const metadata = {
+  title: "Artikel & Wawasan Experiential Learning | Fasel Consulting",
+  description:
+    "Kumpulan artikel, tips, dan wawasan seputar leadership development, experiential learning, team building, dan strategi pengembangan SDM perusahaan dari Fasel Consulting.",
+  keywords: [
+    "Experiential Learning Indonesia",
+    "Leadership Training",
+    "Pelatihan SDM Perusahaan",
+    "Team Building Bogor",
+    "Fasel Consulting",
+    "Corporate Training Jakarta",
+  ],
+  alternates: {
+    canonical: "https://faselconsulting.com/blog",
+  },
+  openGraph: {
+    title: "Artikel & Wawasan Experiential Learning | Fasel Consulting",
+    description:
+      "Kumpulan artikel, tips, dan wawasan seputar leadership development, experiential learning, team building, dan strategi pengembangan SDM perusahaan dari Fasel Consulting.",
+    url: "https://faselconsulting.com/blog",
+    siteName: "Fasel Consulting",
+    type: "website",
+  },
+};
 
-  useEffect(() => {
-    async function loadBlogs() {
-      try {
-        const res = await fetch("/api/blogs");
-        const data = await res.json();
-        if (data.success && data.data) {
-          setBlogs(data.data);
-        }
-      } catch (err) {
-        console.error("Error loading blogs:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadBlogs();
-  }, []);
+export default async function BlogListingPage() {
+  const result = await getBlogs();
+  const blogs = result?.data || [];
 
   return (
     <LayoutStyle7 breadCrumb="Blog" title="Artikel & Wawasan">
@@ -30,14 +38,7 @@ export default function BlogListingPage() {
         <div className="container">
           <div className="row">
             <div className="blog-content col-xl-10 offset-xl-1 col-md-12">
-              {loading ? (
-                <div className="text-center py-5">
-                  <div className="spinner-border text-primary" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
-                  <p className="mt-3 text-muted">Memuat artikel wawasan...</p>
-                </div>
-              ) : blogs.length === 0 ? (
+              {blogs.length === 0 ? (
                 <div className="text-center py-5">
                   <h4>Belum ada artikel yang dipublikasikan.</h4>
                   <p className="text-muted">Nantikan tulisan dan wawasan terbaru dari tim Fasel Consulting.</p>
@@ -53,15 +54,15 @@ export default function BlogListingPage() {
 
                     return (
                       <div className="item mb-5 pb-4 border-bottom" key={blog.id}>
-                        <div className="thumb mb-4" style={{ maxHeight: "420px", overflow: "hidden", borderRadius: "10px" }}>
+                        <div
+                          className="thumb mb-4"
+                          style={{ maxHeight: "420px", overflow: "hidden", borderRadius: "10px" }}
+                        >
                           <Link href={blogUrl}>
                             <img
                               src={imgUrl}
                               alt={blog.title}
                               style={{ width: "100%", height: "auto", objectFit: "cover" }}
-                              onError={(e) => {
-                                e.target.src = "/assets/img/blog/1.jpg";
-                              }}
                             />
                           </Link>
                         </div>
@@ -86,11 +87,11 @@ export default function BlogListingPage() {
                               {blog.title}
                             </Link>
                           </h2>
-                          <p className="text-muted" style={{ lineHeight: "1.8" }}>
-                            {blog.excerpt}
+                          <p className="text-muted">
+                            {blog.excerpt || (blog.content ? blog.content.replace(/<[^>]*>?/gm, "").slice(0, 200) + "..." : "")}
                           </p>
-                          <Link className="btn btn-theme circle btn-md animation mt-2" href={blogUrl}>
-                            Baca Selengkapnya <i className="fas fa-angle-right ms-1"></i>
+                          <Link href={blogUrl} className="btn-simple">
+                            <i className="fas fa-angle-right"></i> Baca Selengkapnya
                           </Link>
                         </div>
                       </div>

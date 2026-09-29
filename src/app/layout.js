@@ -27,22 +27,38 @@ const manrope = Manrope({ subsets: ["latin"] });
 const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Fasel Consulting | – Training - Leadership| Experiential Learning Indonesia",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://faselconsulting.com'),
+  title: {
+    default: "Fasel Consulting | Pelatihan Kepemimpinan & Experiential Learning Indonesia",
+    template: "%s | Fasel Consulting",
+  },
   description:
-    "Fasel, Inc adalah perusahaan teknologi yang menyediakan solusi digital inovatif untuk bisnis Anda.",
-  keywords: ["Experiental Learning", "Training", "Leadership", "Bisnis"],
+    "Fasel Consulting adalah konsultan pelatihan SDM dan kepemimpinan berbasis Experiential Learning terkemuka di Indonesia. Spesialisasi dalam Leadership Transformation, Team Building, dan In-House Training perusahaan.",
+  keywords: [
+    "Experiential Learning Indonesia",
+    "Pelatihan Kepemimpinan Perusahaan",
+    "Leadership Development Program",
+    "Team Building Bogor",
+    "Outbound Training Jakarta",
+    "Fasel Consulting",
+    "Corporate Training SDM",
+    "Pelatihan Karyawan",
+  ],
+  alternates: {
+    canonical: "https://faselconsulting.com",
+  },
   openGraph: {
-    title: "Bantu upgrade perusahaan anda dengan Fasel Consultant",
+    title: "Fasel Consulting | Experiential Learning & Leadership Transformation",
     description:
-      "Fasel Consultant adalah perusahaan teknologi yang menyediakan solusi digital inovatif untuk bisnis Anda.",
-    url: "https://www.faselconsulting.com",
-    siteName: "Fasel Consultant",
+      "Tingkatkan kapasitas kepemimpinan dan kekompakan tim perusahaan Anda bersama program Experiential Learning Fasel Consulting.",
+    url: "https://faselconsulting.com",
+    siteName: "Fasel Consulting",
     images: [
       {
-        url: "https://faselconsulting.com/_next/image?url=%2Fassets%2Fimg%2Fprojects%2Ffaselevent1.jpg&w=3840&q=75",
+        url: "/assets/img/projects/faselevent1.jpg",
         width: 1200,
         height: 630,
-        alt: "Fasel Consulting - Experiental Learning Indonesia",
+        alt: "Fasel Consulting - Experiential Learning & Leadership Training",
       },
     ],
     locale: "id_ID",
@@ -50,10 +66,10 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fasel Consulting",
+    title: "Fasel Consulting | Experiential Learning & Leadership Training",
     description:
-      "Fasel Consulting adalah perusahaan teknologi yang menyediakan solusi digital inovatif untuk bisnis Anda.",
-    images: ["https://www.fasel.com/images/og-image.jpg"],
+      "Konsultan pelatihan SDM dan kepemimpinan berbasis Experiential Learning terdepan di Indonesia.",
+    images: ["/assets/img/projects/faselevent1.jpg"],
   },
 };
 

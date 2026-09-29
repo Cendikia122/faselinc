@@ -1,58 +1,139 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import LayoutStyle7 from "@/components/Layouts/LayoutStyle7";
 import ProjectDetailsContent from "@/components/project/ProjectDetailsContent";
-import Project1Data from "@/assets/jsonData/project/Project1Data.json";
-import Project2Data from "@/assets/jsonData/project/Project2Data.json";
+import { getEventById } from "@/lib/storage";
+import Link from "next/link";
 
-export default function ProjectDetailsPage({ params }) {
+export async function generateMetadata({ params }) {
+  const event = await getEventById(params.id);
+  if (!event) {
+    return {
+      title: "Pelatihan Tidak Ditemukan | Fasel Consulting",
+      description: "Informasi pelatihan atau event tidak ditemukan.",
+    };
+  }
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://faselconsulting.com";
+  const postUrl = `${siteUrl}/project-details/${event.id}`;
+  const cleanExcerpt = (
+    event.short_desc ||
+    event.description?.replace(/<[^>]*>?/gm, "") ||
+    "Program Pelatihan & Event Fasel Consulting"
+  )
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 160);
+
+  const thumbImg = event.thumbFull || event.thumb || "faselevent1.jpg";
+  const imgUrl = thumbImg.startsWith("http")
+    ? thumbImg
+    : thumbImg.startsWith("data:")
+      ? `${siteUrl}/assets/img/projects/faselevent1.jpg`
+      : thumbImg.startsWith("/")
+        ? `${siteUrl}${thumbImg}`
+        : `${siteUrl}/assets/img/projects/${thumbImg}`;
+
+  return {
+    title: `${event.title} | Pelatihan & Event Fasel Consulting`,
+    description: cleanExcerpt,
+    keywords: [
+      event.tag,
+      "Experiential Learning",
+      "Leadership Development",
+      "Team Building",
+      "Pelatihan SDM",
+      "Fasel Consulting",
+    ].filter(Boolean),
+    alternates: {
+      canonical: postUrl,
+    },
+    openGraph: {
+      title: event.title,
+      description: cleanExcerpt,
+      url: postUrl,
+      siteName: "Fasel Consulting",
+      images: [
+        {
+          url: imgUrl,
+          width: 1200,
+          height: 630,
+          alt: event.title,
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: event.title,
+      description: cleanExcerpt,
+      images: [imgUrl],
+    },
+  };
+}
+
+export default async function ProjectDetailsPage({ params }) {
   const { id } = params;
-  const [eventData, setEventData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const event = await getEventById(id);
 
-  useEffect(() => {
-    async function loadEvent() {
-      try {
-        const res = await fetch(`/api/events/${id}`);
-        const result = await res.json();
-        if (result.success && result.data) {
-          setEventData(result.data);
-          setLoading(false);
-          return;
-        }
-      } catch (err) {
-        console.warn("Could not fetch event from API, trying fallback:", err);
-      }
-
-      // Fallback from Project1Data or Project2Data
-      const foundIn1 = Project1Data.find((p) => p.id === parseInt(id));
-      const foundIn2 = Project2Data.find((p) => p.id === parseInt(id));
-      const fallback = foundIn1 || foundIn2 || {
-        id,
-        title: "Pelatihan & Event Fasel Consulting",
-        thumbFull: "faseldrone.jpg",
-        description: "Program pelatihan dan experiential learning dari Fasel Consulting.",
-      };
-
-      setEventData(fallback);
-      setLoading(false);
-    }
-    loadEvent();
-  }, [id]);
-
-  if (loading) {
+  if (!event) {
     return (
-      <LayoutStyle7 breadCrumb="Event" title="Memuat Rincian Event...">
+      <LayoutStyle7 breadCrumb="Pelatihan" title="Event Tidak Ditemukan">
         <div className="container py-5 text-center">
-          <div className="spinner-border text-primary" role="status"></div>
+          <h2>Maaf, program pelatihan atau event tidak ditemukan.</h2>
+          <p className="text-muted">Mungkin jadwal telah berakhir atau dipindahkan.</p>
+          <Link href="/events" className="btn btn-theme circle btn-md mt-3">
+            Lihat Semua Jadwal Pelatihan
+          </Link>
         </div>
       </LayoutStyle7>
     );
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://faselconsulting.com";
+  const postUrl = `${siteUrl}/project-details/${event.id}`;
+  const cleanExcerpt = (
+    event.short_desc ||
+    event.description?.replace(/<[^>]*>?/gm, "") ||
+    "Program Pelatihan & Event Fasel Consulting"
+  )
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 160);
+
+  const thumbImg = event.thumbFull || event.thumb || "faselevent1.jpg";
+  const imgUrl = thumbImg.startsWith("http")
+    ? thumbImg
+    : thumbImg.startsWith("/")
+      ? `${siteUrl}${thumbImg}`
+      : `${siteUrl}/assets/img/projects/${thumbImg}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: event.title,
+    description: cleanExcerpt,
+    provider: {
+      "@type": "Organization",
+      name: "Fasel Consulting",
+      url: siteUrl,
+    },
+    image: [imgUrl.startsWith("http") ? imgUrl : `${siteUrl}${imgUrl}`],
+    offers: {
+      "@type": "Offer",
+      category: event.tag || "Corporate Training",
+      url: postUrl,
+      availability: "https://schema.org/InStock",
+    },
+  };
+
   return (
-    <LayoutStyle7 breadCrumb="Event" title={eventData?.title || "Rincian Pelatihan & Event"}>
-      <ProjectDetailsContent projectInfo={eventData} />
+    <LayoutStyle7 breadCrumb="Pelatihan & Event" title={event.title}>
+      {/* Schema.org Course/Event Structured Data for Google Rich Results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ProjectDetailsContent projectInfo={event} />
     </LayoutStyle7>
   );
 }

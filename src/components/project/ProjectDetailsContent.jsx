@@ -11,7 +11,11 @@ const ProjectDetailsContent = ({ projectInfo }) => {
   const projectData = projectInfo.projectData || [];
   const title = projectInfo.title || "FASEL Crafting Collaboration";
   const description = projectInfo.description || projectInfo.short_desc || projectInfo.text || "";
-  const btnLink = projectInfo.btn_link || "https://wa.me/6281298319944";
+  const rawBtnLink = projectInfo.btn_link;
+  const defaultWaText = encodeURIComponent(`Halo Fasel Consulting, saya ingin konsultasi / mendaftar program: ${title}`);
+  const btnLink = rawBtnLink && rawBtnLink.startsWith("http")
+    ? rawBtnLink
+    : `https://wa.me/6281298319944?text=${defaultWaText}`;
   const btnText = projectInfo.btn_text || "Daftar Event / Pelatihan";
   const imgSrc = thumbFull?.startsWith("/") || thumbFull?.startsWith("http") || thumbFull?.startsWith("data:")
     ? thumbFull

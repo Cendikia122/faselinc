@@ -3,8 +3,36 @@
         "id": 1,
         "thumb": "faselevent1.jpg",
         "tag": "Experiential Learning Approach",
-        "title": "FASEL Crafting Collaboration",
-        "text": "A strong company is built by individuals who share the same vision, motivation, and values. FASEL Crafting Impact is an inspiring event designed to align company core values, strengthen employee engagement, and cultivateleadership and enthusiasm in every individual.",
-        "btnText": "View Event"
+        "title": "FASEL Crafting Collaboration & Core Values",
+        "short_desc": "Perusahaan yang kuat dibangun oleh individu yang memiliki visi, motivasi, dan nilai yang selaras. FASEL Crafting Collaboration dirancang untuk menginternalisasi core values dan mempererat engagement karyawan.",
+        "text": "Perusahaan yang kuat dibangun oleh individu yang memiliki visi, motivasi, dan nilai yang selaras. FASEL Crafting Collaboration dirancang untuk menginternalisasi core values dan mempererat engagement karyawan.",
+        "btn_text": "Lihat Rincian",
+        "btnText": "Lihat Rincian",
+        "date": "Batch Mendatang: Kontak Kami",
+        "location": "Bogor / In-House Company"
+    },
+    {
+        "id": 2,
+        "thumb": "training1.jpg",
+        "tag": "Leadership Class",
+        "title": "Leadforward: Youth & Emerging Leader Camp",
+        "short_desc": "Program akselerasi kepemimpinan intensif untuk calon pemimpin masa depan. Fokus pada self-awareness, communication skills, dan emotional resilience.",
+        "text": "Program akselerasi kepemimpinan intensif untuk calon pemimpin masa depan. Fokus pada self-awareness, communication skills, dan emotional resilience.",
+        "btn_text": "Lihat Rincian",
+        "btnText": "Lihat Rincian",
+        "date": "Pendaftaran Terbuka",
+        "location": "Bogor, Jawa Barat"
+    },
+    {
+        "id": 3,
+        "thumb": "training2.jpg",
+        "tag": "Team Building",
+        "title": "Digital Amazing Race & Team Resilience Challenge",
+        "short_desc": "Petualangan berbasis aplikasi digital yang memadukan strategi, kecepatan, ketangkasan, dan kekompakan tim dalam menyelesaikan misi-misi menantang.",
+        "text": "Petualangan berbasis aplikasi digital yang memadukan strategi, kecepatan, ketangkasan, dan kekompakan tim dalam menyelesaikan misi-misi menantang.",
+        "btn_text": "Lihat Rincian",
+        "btnText": "Lihat Rincian",
+        "date": "Sesuai Jadwal Klien",
+        "location": "Lokasi Fleksibel (Outdoor / Indoor)"
     }
 ]

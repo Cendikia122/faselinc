@@ -1,19 +1,5 @@
 [
   {
-    "id": 4,
-    "title": "tes blog",
-    "slug": "tes-blog-1421",
-    "author": "Fasel Consulting",
-    "date": "29 September 2026",
-    "thumb": "/assets/img/uploads/INV-2326416-QR-260929105539-qris_1790688994267.png",
-    "thumb_full": "/assets/img/uploads/INV-2326416-QR-260929105539-qris_1790688994267.png",
-    "excerpt": "asdkjahdkjahdjasd",
-    "content": "kdhjasdhkadhasdjad",
-    "tags": "Training, Experiential Learning",
-    "status": "published",
-    "created_at": "2026-09-29T13:36:41.422Z"
-  },
-  {
     "id": 1,
     "title": "Experiential Learning dalam Leadership: Strategi Efektif Mengembangkan Kompetensi Karyawan",
     "slug": "experiential-learning-dalam-leadership",
