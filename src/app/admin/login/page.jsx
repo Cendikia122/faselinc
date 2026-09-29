@@ -147,8 +147,7 @@ export default function AdminLoginPage() {
           </form>
 
           <div className="mt-4 p-3 bg-light rounded text-center small text-muted">
-            <i className="fas fa-info-circle me-1 text-primary"></i> Default Login:{" "}
-            <strong>admin</strong> / <strong>suksesmuliaBUL123</strong>
+            <i className="fas fa-shield-alt me-1 text-primary"></i> Area Terbatas Khusus Pengelola Fasel Consulting
           </div>
 
           <div className="text-center mt-3">

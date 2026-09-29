@@ -45,13 +45,12 @@ export async function POST(request) {
       console.warn('MySQL tidak terjangkau, menggunakan fallback credentials:', dbError.message);
     }
 
-    // 2. Fallback jika database belum ada atau password diatur via Environment Variables
+    // 2. Fallback jika database offline atau diatur via Environment Variables
     if (!user) {
       const defaultUser = process.env.ADMIN_USERNAME || 'admin';
       const envPass = process.env.ADMIN_PASSWORD;
-      const validPasswords = [envPass, 'suksesmuliaBUL123', 'admin123'].filter(Boolean);
 
-      if (username === defaultUser && validPasswords.includes(password)) {
+      if (envPass && username === defaultUser && password === envPass) {
         user = { id: 1, username: defaultUser, name: 'Admin Fasel Consulting' };
       }
     }
