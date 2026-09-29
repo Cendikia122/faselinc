@@ -2,17 +2,19 @@
 import React, { useEffect, useState } from 'react';
 import SingleBlog1 from './SingleBlog1';
 
-const BlogStyle1 = ({ sectionClass }) => {
-    const [blogs, setBlogs] = useState([]);
-    const [isLoaded, setIsLoaded] = useState(false);
+const BlogStyle1 = ({ sectionClass, initialBlogs = [] }) => {
+    const [blogs, setBlogs] = useState(initialBlogs);
+    const [isLoaded, setIsLoaded] = useState(initialBlogs.length > 0);
 
     useEffect(() => {
+        // Jika data sudah di-supply lewat SSR, tidak perlu fetch ulang yang memperlambat browser
+        if (initialBlogs && initialBlogs.length > 0) return;
+
         async function fetchBlogs() {
             try {
                 const res = await fetch('/api/blogs');
                 const data = await res.json();
                 if (data.success && Array.isArray(data.data)) {
-                    // Hanya tampilkan data artikel nyata dari admin panel
                     const published = data.data.filter(b => b.status === 'published' || !b.status);
                     setBlogs(published.slice(0, 3));
                 }
@@ -23,7 +25,7 @@ const BlogStyle1 = ({ sectionClass }) => {
             }
         }
         fetchBlogs();
-    }, []);
+    }, [initialBlogs]);
 
     // Jangan tampilkan section jika tidak ada artikel dari admin
     if (isLoaded && blogs.length === 0) {

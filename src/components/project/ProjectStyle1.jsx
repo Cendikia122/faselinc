@@ -5,10 +5,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import Project1Data from "@/assets/jsonData/project/Project1Data.json"
 import SingleProject1 from './SingleProject1';
 
-const ProjectStyle1 = () => {
-    const [events, setEvents] = useState(Project1Data);
+const ProjectStyle1 = ({ initialEvents = [] }) => {
+    const [events, setEvents] = useState(initialEvents && initialEvents.length > 0 ? initialEvents : Project1Data);
 
     useEffect(() => {
+        // Jika data sudah di-supply lewat SSR, tidak perlu fetch ulang yang memperlambat halaman
+        if (initialEvents && initialEvents.length > 0) return;
+
         async function fetchEvents() {
             try {
                 const res = await fetch('/api/events');
@@ -21,7 +24,7 @@ const ProjectStyle1 = () => {
             }
         }
         fetchEvents();
-    }, []);
+    }, [initialEvents]);
 
     return (
         <>
@@ -29,10 +32,10 @@ const ProjectStyle1 = () => {
                 <div className="container">
                     <div className="heading-left text-light">
                         <div className="row">
-                            <div className="col-lg-5">
+                            <div className="col-lg-6">
                                 <div className="content-left">
-                                    <h5 className="sub-heading">Event</h5>
-                                    <h2 className="heading">Know more about our events.</h2>
+                                    <h5 className="sub-heading">Pelatihan & Event</h5>
+                                    <h2 className="heading">Program Pelatihan Unggulan Fasel Consulting</h2>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +51,7 @@ const ProjectStyle1 = () => {
                                         freeMode={true}
                                         grabCursor={false}
                                         autoplay={false}
-                                        loop={true}
+                                        loop={events.length > 1}
                                         keyboard={{
                                             enabled: true,
                                         }}

@@ -123,11 +123,38 @@ export function slugify(text) {
     .substring(0, 100);
 }
 
+// In-memory cache for high-speed response (sub-millisecond)
+let memoryCache = {
+  blogsPublished: null,
+  blogsPublishedTime: 0,
+  eventsActive: null,
+  eventsActiveTime: 0,
+};
+
+export function invalidateCache() {
+  memoryCache = {
+    blogsPublished: null,
+    blogsPublishedTime: 0,
+    eventsActive: null,
+    eventsActiveTime: 0,
+  };
+}
+
 // ==========================================
 // BLOGS CRUD (Hybrid MySQL + JSON Storage)
 // ==========================================
 
 export async function getBlogs(limit = null, all = false) {
+  // Cek cache memori terlebih dahulu untuk kecepatan maksimal jika hanya butuh published
+  if (!all && memoryCache.blogsPublished && (Date.now() - memoryCache.blogsPublishedTime < 60000)) {
+    const cached = memoryCache.blogsPublished;
+    const result = limit ? cached.slice(0, limit) : cached;
+    return { source: 'cache', data: result };
+  }
+
+  let finalBlogs = [];
+  let source = 'json';
+
   // 1. Coba ambil dari MySQL
   try {
     let sql = all
@@ -136,17 +163,30 @@ export async function getBlogs(limit = null, all = false) {
     if (limit) sql += ` LIMIT ${limit}`;
     const rows = await query(sql);
     if (Array.isArray(rows)) {
-      return { source: 'mysql', data: rows };
+      finalBlogs = rows;
+      source = 'mysql';
     }
   } catch (dbErr) {
-    console.warn('[Storage] MySQL getBlogs offline:', dbErr.message);
+    if (process.env.DEBUG_MYSQL === 'true') {
+      console.warn('[Storage] MySQL getBlogs offline:', dbErr.message);
+    }
   }
 
-  // 2. Fallback ke JSON Storage
-  const blogs = readJson(BLOGS_FILE);
-  const filtered = all ? blogs : blogs.filter(b => b.status !== 'draft');
-  const result = limit ? filtered.slice(0, limit) : filtered;
-  return { source: 'json', data: result };
+  // 2. Fallback ke JSON Storage jika MySQL tidak ada data atau offline
+  if (finalBlogs.length === 0 && source !== 'mysql') {
+    const blogs = readJson(BLOGS_FILE);
+    const filtered = all ? blogs : blogs.filter(b => b.status !== 'draft');
+    finalBlogs = limit ? filtered.slice(0, limit) : filtered;
+    source = 'json';
+  }
+
+  // Simpan ke cache jika mengambil data published
+  if (!all && finalBlogs.length > 0 && !limit) {
+    memoryCache.blogsPublished = finalBlogs;
+    memoryCache.blogsPublishedTime = Date.now();
+  }
+
+  return { source, data: finalBlogs };
 }
 
 export async function getBlogByIdOrSlug(identifier) {
@@ -221,6 +261,7 @@ export async function createBlog(item) {
     writeJson(BLOGS_FILE, blogs);
   } catch (e) {}
 
+  invalidateCache();
   return { success: true, blog: newBlog, id: newBlog.id, slug, savedToMySQL };
 }
 
@@ -261,6 +302,7 @@ export async function updateBlog(id, item) {
     }
   } catch (e) {}
 
+  invalidateCache();
   return { success: true, message: 'Artikel berhasil diperbarui', updatedInMySQL };
 }
 
@@ -285,6 +327,7 @@ export async function deleteBlog(id) {
     writeJson(BLOGS_FILE, filtered);
   } catch (e) {}
 
+  invalidateCache();
   return { success: true, message: 'Artikel berhasil dihapus', deletedFromMySQL };
 }
 
@@ -293,6 +336,16 @@ export async function deleteBlog(id) {
 // ==========================================
 
 export async function getEvents(limit = null, all = false) {
+  // Cek cache memori terlebih dahulu untuk kecepatan maksimal
+  if (!all && memoryCache.eventsActive && (Date.now() - memoryCache.eventsActiveTime < 60000)) {
+    const cached = memoryCache.eventsActive;
+    const result = limit ? cached.slice(0, limit) : cached;
+    return { source: 'cache', data: result };
+  }
+
+  let finalEvents = [];
+  let source = 'json';
+
   // 1. Coba ambil dari MySQL
   try {
     let sql = all
@@ -301,17 +354,30 @@ export async function getEvents(limit = null, all = false) {
     if (limit) sql += ` LIMIT ${limit}`;
     const rows = await query(sql);
     if (Array.isArray(rows)) {
-      return { source: 'mysql', data: rows };
+      finalEvents = rows;
+      source = 'mysql';
     }
   } catch (dbErr) {
-    console.warn('[Storage] MySQL getEvents offline:', dbErr.message);
+    if (process.env.DEBUG_MYSQL === 'true') {
+      console.warn('[Storage] MySQL getEvents offline:', dbErr.message);
+    }
   }
 
   // 2. Fallback ke JSON Storage
-  const events = readJson(EVENTS_FILE);
-  const filtered = all ? events : events.filter(e => e.status !== 'inactive');
-  const result = limit ? filtered.slice(0, limit) : filtered;
-  return { source: 'json', data: result };
+  if (finalEvents.length === 0 && source !== 'mysql') {
+    const events = readJson(EVENTS_FILE);
+    const filtered = all ? events : events.filter(e => e.status !== 'inactive');
+    finalEvents = limit ? filtered.slice(0, limit) : filtered;
+    source = 'json';
+  }
+
+  // Simpan ke cache jika mengambil data active
+  if (!all && finalEvents.length > 0 && !limit) {
+    memoryCache.eventsActive = finalEvents;
+    memoryCache.eventsActiveTime = Date.now();
+  }
+
+  return { source, data: finalEvents };
 }
 
 export async function getEventById(id) {
@@ -383,6 +449,7 @@ export async function createEvent(item) {
     writeJson(EVENTS_FILE, events);
   } catch (e) {}
 
+  invalidateCache();
   return { success: true, event: newEvent, id: newEvent.id, savedToMySQL };
 }
 
@@ -424,6 +491,7 @@ export async function updateEvent(id, item) {
     }
   } catch (e) {}
 
+  invalidateCache();
   return { success: true, message: 'Event berhasil diperbarui', updatedInMySQL };
 }
 
@@ -448,5 +516,6 @@ export async function deleteEvent(id) {
     writeJson(EVENTS_FILE, filtered);
   } catch (e) {}
 
+  invalidateCache();
   return { success: true, message: 'Event berhasil dihapus', deletedFromMySQL };
 }

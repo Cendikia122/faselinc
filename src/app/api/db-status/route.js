@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
-import { query } from '@/lib/mysql';
+import { query, resetDbCircuit } from '@/lib/mysql';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
+  resetDbCircuit(); // Izinkan pengujian live
   const host = process.env.DB_HOST || 'localhost';
   const port = process.env.DB_PORT || '3306';
   const user = process.env.DB_USER || 'root';

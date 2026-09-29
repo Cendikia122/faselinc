@@ -1,34 +1,75 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import LayoutStyle7 from "@/components/Layouts/LayoutStyle7";
 import Link from "next/link";
-import fallbackEvents from "@/assets/jsonData/project/Project1Data.json";
+import { getEvents } from "@/lib/storage";
 
-export default function EventsListingPage() {
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
+// ✅ SEO Komprehensif Halaman Pelatihan & Event
+export const metadata = {
+  title: "Jadwal Pelatihan & Event Kepemimpinan | Fasel Consulting",
+  description:
+    "Daftar jadwal pelatihan kepemimpinan, leadership development camp, corporate outbound, dan experiential learning program dari Fasel Consulting Indonesia.",
+  keywords: [
+    "Pelatihan Kepemimpinan",
+    "Jadwal Training SDM",
+    "Leadership Camp Indonesia",
+    "Experiential Learning Training",
+    "Team Building Outbound Bogor",
+    "In-House Training Perusahaan",
+    "Fasel Consulting"
+  ],
+  alternates: {
+    canonical: "https://faselconsulting.com/events",
+  },
+  openGraph: {
+    title: "Jadwal Pelatihan & Event Kepemimpinan | Fasel Consulting",
+    description:
+      "Tingkatkan performa tim dan kapasitas manajerial organisasi Anda melalui pelatihan experiential learning terbaik.",
+    url: "https://faselconsulting.com/events",
+    siteName: "Fasel Consulting",
+    images: [
+      {
+        url: "/assets/img/projects/faselevent1.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Pelatihan & Event Fasel Consulting",
+      },
+    ],
+    locale: "id_ID",
+    type: "website",
+  },
+};
 
-  useEffect(() => {
-    async function loadEvents() {
-      try {
-        const res = await fetch("/api/events");
-        const data = await res.json();
-        if (data.success && data.data && data.data.length > 0) {
-          setEvents(data.data);
-          setLoading(false);
-          return;
+export default async function EventsListingPage() {
+  // SSR Fetching: Data langsung siap dari server dalam hitungan milidetik
+  const result = await getEvents();
+  const events = result?.data || [];
+
+  // Schema.org Structured Data ItemList untuk Google Search
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": events.map((evt, idx) => ({
+      "@type": "ListItem",
+      "position": idx + 1,
+      "item": {
+        "@type": "Course",
+        "name": evt.title,
+        "description": evt.short_desc || evt.title,
+        "provider": {
+          "@type": "Organization",
+          "name": "Fasel Consulting",
+          "sameAs": "https://faselconsulting.com"
         }
-      } catch (err) {
-        console.warn("Could not load dynamic events, using fallback:", err);
       }
-      setEvents(fallbackEvents || []);
-      setLoading(false);
-    }
-    loadEvents();
-  }, []);
+    }))
+  };
 
   return (
     <LayoutStyle7 breadCrumb="Pelatihan & Event" title="Jadwal Pelatihan & Event">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="project-area default-padding">
         <div className="container">
           <div className="row mb-5 text-center">
@@ -41,14 +82,7 @@ export default function EventsListingPage() {
             </div>
           </div>
 
-          {loading ? (
-            <div className="text-center py-5">
-              <div className="spinner-border text-primary" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-              <p className="mt-3 text-muted">Memuat daftar pelatihan & event...</p>
-            </div>
-          ) : events.length === 0 ? (
+          {events.length === 0 ? (
             <div className="text-center py-5">
               <h4>Belum ada jadwal pelatihan terbuka saat ini.</h4>
               <p className="text-muted">Hubungi tim kami untuk konsultasi program in-house training khusus perusahaan Anda.</p>
