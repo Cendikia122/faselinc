@@ -107,7 +107,7 @@ export default function AdminBlogsPage() {
                         >
                           <img
                             src={
-                              blog.thumb?.startsWith("http") || blog.thumb?.startsWith("/")
+                              blog.thumb?.startsWith("http") || blog.thumb?.startsWith("/") || blog.thumb?.startsWith("data:")
                                 ? blog.thumb
                                 : `/assets/img/blog/${blog.thumb || "1.jpg"}`
                             }

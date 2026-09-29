@@ -22,9 +22,27 @@ export function getPool() {
   return pool;
 }
 
+let migrated = false;
+async function ensureThumbColumns(db) {
+  if (migrated) return;
+  migrated = true;
+  try {
+    await db.query('ALTER TABLE blogs MODIFY COLUMN thumb MEDIUMTEXT');
+  } catch (e) {}
+  try {
+    await db.query('ALTER TABLE blogs MODIFY COLUMN thumb_full MEDIUMTEXT');
+  } catch (e) {}
+  try {
+    await db.query('ALTER TABLE events MODIFY COLUMN thumb MEDIUMTEXT');
+  } catch (e) {}
+}
+
 export async function query(sql, params = []) {
   try {
     const db = getPool();
+    if (!migrated) {
+      await ensureThumbColumns(db);
+    }
     const [rows] = await db.query(sql, params);
     return rows;
   } catch (error) {

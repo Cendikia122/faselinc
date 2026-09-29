@@ -1,35 +1,44 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
+import Link from 'next/link';
 
 const SingleBlog1 = ({ blog }) => {
-    const { id, thumb, date, animationDelay, author, title, btnText } = blog
+    const { id, thumb, date, animationDelay, author, title, btnText, slug } = blog;
+    const targetUrl = `/blog/${slug || id}`;
+    const imgSrc = thumb?.startsWith('/') || thumb?.startsWith('http') || thumb?.startsWith('data:')
+        ? thumb
+        : `/assets/img/blog/${thumb || '1.jpg'}`;
 
     return (
-        <>
-            <div className="col-xl-4 col-md-6 mb-30 wow fadeInUp" data-wow-delay={[animationDelay]}>
-                <div className="blog-style-one">
-                    <div className="thumb">
-                        <Link href={`/blog-single-with-sidebar/${id}`}><Image src={`/assets/img/blog/${thumb}`} alt="Thumb" width={800} height={600} /></Link>
+        <div className="col-xl-4 col-md-6 mb-30 wow fadeInUp" data-wow-delay={animationDelay ? [animationDelay] : undefined}>
+            <div className="blog-style-one">
+                <div className="thumb" style={{ height: '240px', overflow: 'hidden' }}>
+                    <Link href={targetUrl}>
+                        <img
+                            src={imgSrc}
+                            alt={title || "Blog Thumb"}
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                    </Link>
+                </div>
+                <div className="info">
+                    <div className="blog-meta">
+                        <ul>
+                            <li>
+                                <span>By </span>
+                                <Link href="#" scroll={false}>{author || 'Fasel Consulting'}</Link>
+                            </li>
+                            <li>{date}</li>
+                        </ul>
                     </div>
-                    <div className="info">
-                        <div className="blog-meta">
-                            <ul>
-                                <li>
-                                    <span>By </span>
-                                    <Link href="#" scroll={false}>{author}</Link>
-                                </li>
-                                <li>{date}</li>
-                            </ul>
-                        </div>
-                        <h4>
-                            <Link href={`/blog-single-with-sidebar/${id}`}>{title}</Link>
-                        </h4>
-                        <Link href={`/blog-single-with-sidebar/${id}`} className="btn-simple"><i className="fas fa-angle-right"></i>{btnText}</Link>
-                    </div>
+                    <h4>
+                        <Link href={targetUrl}>{title}</Link>
+                    </h4>
+                    <Link href={targetUrl} className="btn-simple">
+                        <i className="fas fa-angle-right"></i> {btnText || "Baca Selengkapnya"}
+                    </Link>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

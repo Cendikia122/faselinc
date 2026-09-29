@@ -19,27 +19,41 @@ export async function POST(request) {
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
+    const mimeType = file.type || 'image/jpeg';
+    const base64Data = buffer.toString('base64');
+    const dataUrl = `data:${mimeType};base64,${base64Data}`;
 
-    const uploadsDir = path.join(process.cwd(), 'public', 'assets', 'img', 'uploads');
-    if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir, { recursive: true });
+    // 1. Coba simpan ke file lokal di folder public (berlaku di localhost / cPanel / VPS)
+    try {
+      const uploadsDir = path.join(process.cwd(), 'public', 'assets', 'img', 'uploads');
+      if (!fs.existsSync(uploadsDir)) {
+        fs.mkdirSync(uploadsDir, { recursive: true });
+      }
+
+      const ext = path.extname(file.name) || '.jpg';
+      const cleanName = path.basename(file.name, ext).replace(/[^a-zA-Z0-9_-]/g, '_');
+      const fileName = `${cleanName}_${Date.now()}${ext}`;
+      const filePath = path.join(uploadsDir, fileName);
+
+      fs.writeFileSync(filePath, buffer);
+
+      return NextResponse.json({
+        success: true,
+        message: 'Upload berhasil',
+        fileName,
+        url: `/assets/img/uploads/${fileName}`,
+      });
+    } catch (fsError) {
+      // 2. Jika EROFS (Read-only filesystem seperti di Vercel Serverless), gunakan Data URL
+      console.warn('[Upload] Filesystem read-only (Serverless Vercel). Beralih ke Data URL:', fsError.message);
+
+      return NextResponse.json({
+        success: true,
+        message: 'Upload berhasil (Cloud Data URL)',
+        fileName: file.name,
+        url: dataUrl,
+      });
     }
-
-    const ext = path.extname(file.name) || '.jpg';
-    const cleanName = path.basename(file.name, ext).replace(/[^a-zA-Z0-9_-]/g, '_');
-    const fileName = `${cleanName}_${Date.now()}${ext}`;
-    const filePath = path.join(uploadsDir, fileName);
-
-    fs.writeFileSync(filePath, buffer);
-
-    const fileUrl = `/assets/img/uploads/${fileName}`;
-
-    return NextResponse.json({
-      success: true,
-      message: 'Upload berhasil',
-      fileName,
-      url: fileUrl,
-    });
   } catch (error) {
     console.error('Upload error:', error);
     return NextResponse.json({ success: false, message: error.message }, { status: 500 });

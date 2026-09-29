@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { adminFetch } from "@/lib/apiClient";
+import { compressImage } from "@/lib/imageCompressor";
 
 export default function NewBlogPage() {
   const router = useRouter();
@@ -27,21 +28,22 @@ export default function NewBlogPage() {
   };
 
   const handleFileUpload = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    const data = new FormData();
-    data.append("file", file);
+    const rawFile = e.target.files?.[0];
+    if (!rawFile) return;
 
     setUploading(true);
     try {
+      const file = await compressImage(rawFile);
+      const data = new FormData();
+      data.append("file", file);
+
       const res = await adminFetch("/api/upload", {
         method: "POST",
         body: data,
       });
       const result = await res.json();
       if (res.ok && result.success) {
-        setForm({ ...form, thumb: result.url });
+        setForm((prev) => ({ ...prev, thumb: result.url }));
         toast.success("Gambar berhasil diunggah!");
       } else {
         toast.error(result.message || "Gagal mengunggah gambar");
@@ -166,7 +168,22 @@ export default function NewBlogPage() {
                     />
                     {uploading && <span className="spinner-border spinner-border-sm text-primary"></span>}
                   </div>
-                  <small className="text-muted">Pilih file foto dari komputer Anda untuk upload otomatis.</small>
+                  <small className="text-muted d-block">Pilih file foto dari komputer Anda untuk upload otomatis.</small>
+                  {form.thumb && (
+                    <div className="mt-2 d-flex align-items-center gap-2">
+                      <img
+                        src={
+                          form.thumb.startsWith("http") || form.thumb.startsWith("/") || form.thumb.startsWith("data:")
+                            ? form.thumb
+                            : `/assets/img/blog/${form.thumb}`
+                        }
+                        alt="Preview"
+                        style={{ width: "64px", height: "48px", objectFit: "cover", borderRadius: "6px", border: "1px solid #ddd" }}
+                        onError={(e) => { e.target.src = "/assets/img/blog/1.jpg"; }}
+                      />
+                      <small className="text-success fw-bold"><i className="fas fa-check-circle me-1"></i> Foto terpilih</small>
+                    </div>
+                  )}
                 </div>
 
                 {/* Excerpt */}

@@ -47,7 +47,7 @@ export default function BlogListingPage() {
                   {blogs.map((blog) => {
                     const blogUrl = `/blog/${blog.slug || blog.id}`;
                     const imgUrl =
-                      blog.thumb?.startsWith("http") || blog.thumb?.startsWith("/")
+                      blog.thumb?.startsWith("http") || blog.thumb?.startsWith("/") || blog.thumb?.startsWith("data:")
                         ? blog.thumb
                         : `/assets/img/blog/${blog.thumb || "1.jpg"}`;
 

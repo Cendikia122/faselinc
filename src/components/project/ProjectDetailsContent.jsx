@@ -13,7 +13,7 @@ const ProjectDetailsContent = ({ projectInfo }) => {
   const description = projectInfo.description || projectInfo.short_desc || projectInfo.text || "";
   const btnLink = projectInfo.btn_link || "https://wa.me/6281298319944";
   const btnText = projectInfo.btn_text || "Daftar Event / Pelatihan";
-  const imgSrc = thumbFull?.startsWith("/") || thumbFull?.startsWith("http")
+  const imgSrc = thumbFull?.startsWith("/") || thumbFull?.startsWith("http") || thumbFull?.startsWith("data:")
     ? thumbFull
     : `/assets/img/projects/${thumbFull}`;
 
@@ -23,7 +23,7 @@ const ProjectDetailsContent = ({ projectInfo }) => {
         <div className="container">
           <div className="project-details-items">
             <div className="thumb mb-4" style={{ borderRadius: '12px', overflow: 'hidden' }}>
-              <img src={imgSrc} alt={title} style={{ width: '100%', maxHeight: '520px', objectFit: 'cover' }} onError={(e) => { e.target.src = "/assets/img/projects/faselevent1.jpg"; }} />
+              <img src={imgSrc} alt={title} style={{ width: '100%', maxHeight: '520px', objectFit: 'cover' }} />
             </div>
             <div className="top-info">
               <div className="row">

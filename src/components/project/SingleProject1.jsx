@@ -6,7 +6,7 @@ const SingleProject1 = ({ project }) => {
     const { id, thumb, tag, title, text, short_desc, btnText, btn_text } = project;
     const displayText = text || short_desc;
     const displayBtnText = btnText || btn_text || "Lihat Rincian";
-    const imgSrc = thumb?.startsWith('/') || thumb?.startsWith('http') 
+    const imgSrc = thumb?.startsWith('/') || thumb?.startsWith('http') || thumb?.startsWith('data:')
         ? thumb 
         : `/assets/img/projects/${thumb || 'faselevent1.jpg'}`;
 

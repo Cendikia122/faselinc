@@ -106,7 +106,7 @@ export default function AdminEventsPage() {
                         >
                           <img
                             src={
-                              evt.thumb?.startsWith("http") || evt.thumb?.startsWith("/")
+                              evt.thumb?.startsWith("http") || evt.thumb?.startsWith("/") || evt.thumb?.startsWith("data:")
                                 ? evt.thumb
                                 : `/assets/img/projects/${evt.thumb || "faselevent1.jpg"}`
                             }
