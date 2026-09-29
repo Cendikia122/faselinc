@@ -13,7 +13,7 @@ const HeaderTopStyle4 = () => {
                                     <i className="fas fa-map-marker-alt"></i> Bogor, Indonesia
                                 </li>
                                 <li>
-                                    <a href="tel:+4733378901"><i className="fas fa-phone-alt"></i> +62 812 9831 9944</a>
+                                    <a href="tel:+6281298319944"><i className="fas fa-phone-alt"></i> +62 812 9831 9944</a>
                                 </li>
                             </ul>
                         </div>

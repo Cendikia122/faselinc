@@ -1,25 +1,34 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import BlogData from '@/assets/jsonData/blog/BlogData.json';
 import SingleBlog1 from './SingleBlog1';
 
 const BlogStyle1 = ({ sectionClass }) => {
-    const [blogs, setBlogs] = useState(BlogData.slice(0, 3));
+    const [blogs, setBlogs] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         async function fetchBlogs() {
             try {
                 const res = await fetch('/api/blogs');
                 const data = await res.json();
-                if (data.success && data.data && data.data.length > 0) {
-                    setBlogs(data.data.slice(0, 3));
+                if (data.success && Array.isArray(data.data)) {
+                    // Hanya tampilkan data artikel nyata dari admin panel
+                    const published = data.data.filter(b => b.status === 'published' || !b.status);
+                    setBlogs(published.slice(0, 3));
                 }
             } catch (err) {
-                console.warn('Could not load dynamic blogs, using fallback:', err);
+                console.warn('Could not load dynamic blogs:', err);
+            } finally {
+                setIsLoaded(true);
             }
         }
         fetchBlogs();
     }, []);
+
+    // Jangan tampilkan section jika tidak ada artikel dari admin
+    if (isLoaded && blogs.length === 0) {
+        return null;
+    }
 
     return (
         <div className={`home-blog-area default-padding bottom-less ${sectionClass ? sectionClass : ""}`}>
@@ -35,7 +44,7 @@ const BlogStyle1 = ({ sectionClass }) => {
                 </div>
             </div>
             <div className="container">
-                <div className="row">
+                <div className="row justify-content-center">
                     {blogs.map((blog) => (
                         <SingleBlog1 blog={blog} key={blog.id} />
                     ))}

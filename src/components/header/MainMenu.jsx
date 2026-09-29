@@ -4,7 +4,7 @@ import Link from 'next/link';
 const MainMenu = ({ toggleSubMenu, navbarPlacement }) => {
     return (
         <>
-            <ul className={`nav navbar-nav ${navbarPlacement}`} data-in="fadeInDown" data-out="fadeOutUp">
+            <ul className={`nav navbar-nav ${navbarPlacement || 'navbar-center'} fasel-compact-nav`} data-in="fadeInDown" data-out="fadeOutUp">
                 <li><Link href="/">Beranda</Link></li>
                 <li className="dropdown">
                     <Link href="/about-us" className="dropdown-toggle" data-toggle="dropdown" onClick={toggleSubMenu}>Tentang Kami</Link>

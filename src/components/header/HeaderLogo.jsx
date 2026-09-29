@@ -6,16 +6,14 @@ import Link from 'next/link';
 
 const HeaderLogo = ({ openMenu }) => {
     return (
-        <>
-            <div className="navbar-header">
-                <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu" onClick={openMenu}>
-                    <i className="fa fa-bars"></i>
-                </button>
-                <Link className="navbar-brand" href="/">
-                    <Image src={logo} className="logo" alt="Logo" />
-                </Link>
-            </div>
-        </>
+        <div className="navbar-header fasel-logo-wrapper">
+            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu" onClick={openMenu}>
+                <i className="fa fa-bars"></i>
+            </button>
+            <Link className="navbar-brand" href="/" style={{ padding: '0', margin: '0', display: 'flex', alignItems: 'center' }}>
+                <Image src={logo} className="logo fasel-brand-img" alt="Fasel Consulting Logo" priority />
+            </Link>
+        </div>
     );
 };
 

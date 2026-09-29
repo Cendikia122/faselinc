@@ -6,7 +6,7 @@ const SingleBlog1 = ({ blog }) => {
     const targetUrl = `/blog/${slug || id}`;
     const imgSrc = thumb?.startsWith('/') || thumb?.startsWith('http') || thumb?.startsWith('data:')
         ? thumb
-        : `/assets/img/blog/${thumb || '1.jpg'}`;
+        : `/assets/img/blog/${thumb || 'ar.jpg'}`;
 
     return (
         <div className="col-xl-4 col-md-6 mb-30 wow fadeInUp" data-wow-delay={animationDelay ? [animationDelay] : undefined}>

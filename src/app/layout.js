@@ -16,6 +16,7 @@ import '@/assets/css/validnavs.css';
 import '@/assets/css/helper.css';
 import '@/assets/css/unit-test.css';
 import '@/assets/css/style.css';
+import '@/assets/css/custom-navbar.css';
 
 import Dependency from '@/components/utilities/Dependency';
 import { ToastContainer } from 'react-toastify';

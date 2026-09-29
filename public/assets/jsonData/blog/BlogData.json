@@ -13,35 +13,5 @@
         "thumbFull": "ar.jpg",
         "thumb": "ar.jpg",
         "animationDelay": "300ms"
-    },
-    {
-        "id": 2,
-        "date": "18 September 2026",
-        "dateIcon": "far fa-calendar-alt",
-        "author": "Ardian Rangga",
-        "authorIcon": "far fa-user-circle",
-        "title": "Membangun Mindset Kepemimpinan Masa Depan (Growth Mindset Leadership)",
-        "slug": "membangun-mindset-kepemimpinan-masa-depan",
-        "text": "Kepemimpinan bukan tentang gelar atau jabatan, melainkan tentang kemampuan menginspirasi orang lain untuk berkembang dan mencapai potensi terbaik mereka melalui Growth Mindset.",
-        "btnText": "Baca Selengkapnya",
-        "btnIcon": "fas fa-angle-right",
-        "thumbFull": "2.jpg",
-        "thumb": "2.jpg",
-        "animationDelay": "500ms"
-    },
-    {
-        "id": 3,
-        "date": "10 September 2026",
-        "dateIcon": "far fa-calendar-alt",
-        "author": "Fasel Consulting",
-        "authorIcon": "far fa-user-circle",
-        "title": "Mengapa Team Building Tradisional Sering Gagal dan Cara Mengatasinya",
-        "slug": "mengapa-team-building-tradisional-sering-gagal",
-        "text": "Banyak kegiatan outbound hanya fokus pada kesenangan sesaat tanpa adanya fasilitasi refleksi mendalam. Fasel Consulting memastikan setiap sesi team building memiliki dampak nyata pada produktivitas tim.",
-        "btnText": "Baca Selengkapnya",
-        "btnIcon": "fas fa-angle-right",
-        "thumbFull": "3.jpg",
-        "thumb": "3.jpg",
-        "animationDelay": "700ms"
     }
 ]

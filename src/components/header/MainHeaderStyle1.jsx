@@ -10,46 +10,46 @@ import Image from 'next/image';
 import logo from '@/assets/img/fasellogo.png';
 
 const MainHeaderStyle1 = () => {
-
     const isMenuSticky = useStickyMenu();
     const toggleSubMenu = useSubMenuToggle();
     const { isOpen, openMenu, closeMenu } = useSidebarMenu();
 
     return (
-        <>
-            <header>
-                <nav className={`navbar mobile-sidenav navbar-style-one navbar-sticky navbar-default validnavs blacks navbar-fixed on menu-center no-full ${isMenuSticky ? 'sticked' : 'no-background'} ${isOpen ? "navbar-responsive force-sticky" : ""}`}>
-                    <div className="container">
-                        <div className="row align-center">
-                            <div className="col-xl-2 col-lg-3 col-md-2 col-sm-1 col-1">
-                                <HeaderLogo openMenu={openMenu} />
-                            </div>
-                            <div className="col-xl-6 offset-xl-1 col-lg-6 col-md-4 col-sm-4 col-4">
-                                <div className={`collapse navbar-collapse collapse-mobile ${isOpen ? "show" : ""}`} id="navbar-menu">
-                                    <Image src={logo} alt="Logo" />
-                                    <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu" onClick={closeMenu}>
-                                        <i className="fa fa-times"></i>
-                                    </button>
-                                    <MainMenu navbarPlacement="navbar-center" isOpen={isOpen} closeMenu={closeMenu} toggleSubMenu={toggleSubMenu} />
-                                </div>
-                            </div>
-                            <div className="col-xl-3 col-lg-3 col-md-6 col-sm-7 col-7">
-                                <div className="attr-right">
-                                    <div className="attr-nav">
-                                        <ul>
-                                            <li className="button">
-                                                <Link href="/contact-us">Get consultant</Link>
-                                            </li>
-                                        </ul>
-                                    </div>
+        <header className="fasel-header-wrapper">
+            <nav className={`navbar mobile-sidenav navbar-style-one navbar-sticky navbar-default validnavs navbar-fixed on menu-center no-full fasel-white-gradient-nav ${isMenuSticky ? 'sticked' : ''} ${isOpen ? "navbar-responsive force-sticky" : ""}`}>
+                <div className="container-fluid fasel-nav-container">
+                    <div className="fasel-nav-inner">
+                        {/* Logo Kiri */}
+                        <div className="fasel-nav-logo">
+                            <HeaderLogo openMenu={openMenu} />
+                        </div>
+
+                        {/* Menu Navigasi Tengah (1 Baris Rata, Compact, Anti Numpuk) */}
+                        <div className={`collapse navbar-collapse collapse-mobile fasel-nav-menu-wrap ${isOpen ? "show" : ""}`} id="navbar-menu">
+                            <Image src={logo} alt="Logo Fasel Consulting" className="fasel-drawer-logo" />
+                            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu" onClick={closeMenu}>
+                                <i className="fa fa-times"></i>
+                            </button>
+                            <MainMenu navbarPlacement="navbar-center" isOpen={isOpen} closeMenu={closeMenu} toggleSubMenu={toggleSubMenu} />
+                        </div>
+
+                        {/* Tombol CTA Kanan */}
+                        <div className="fasel-nav-cta">
+                            <div className="attr-right">
+                                <div className="attr-nav">
+                                    <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                                        <li className="button">
+                                            <Link href="/contact-us" className="fasel-consultant-btn">Get Consultant</Link>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div className={`overlay-screen ${isOpen ? "opened" : ""}`} onClick={closeMenu}></div>
                     </div>
-                </nav>
-            </header>
-        </>
+                    <div className={`overlay-screen ${isOpen ? "opened" : ""}`} onClick={closeMenu}></div>
+                </div>
+            </nav>
+        </header>
     );
 };
 

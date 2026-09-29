@@ -1,0 +1,217 @@
+/* ==========================================================================
+   FASEL CONSULTING - Modern Sleek White Gradient Navbar
+   Guarantees 1 single horizontal row (no 2-tier wrap) & crisp visibility
+   ========================================================================== */
+
+/* Navbar White Gradient Background - crystal clear over dark hero images */
+nav.navbar.fasel-white-gradient-nav,
+nav.navbar.navbar-style-one,
+nav.navbar.validnavs.navbar-fixed,
+nav.navbar.validnavs.navbar-sticky,
+nav.navbar.validnavs.sticked {
+    background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.97) 65%, rgba(248, 250, 252, 0.94) 100%) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08) !important;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.85) !important;
+    top: 0 !important;
+    padding: 6px 0 !important;
+}
+
+/* Eradicate the template's weird skewed polygon cutting through the navbar */
+nav.navbar.navbar-style-one.validnavs.navbar-fixed.no-background .navbar-header::after,
+nav.navbar.navbar-style-one.validnavs.navbar-fixed.no-background .navbar-header::before,
+nav.navbar.validnavs .navbar-header::after,
+nav.navbar.validnavs .navbar-header::before,
+nav.navbar.navbar-style-one .navbar-header::after,
+nav.navbar.navbar-style-one .navbar-header::before {
+    display: none !important;
+    content: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* Reset logo positioning so it sits cleanly centered */
+nav.navbar .navbar-header img.logo,
+nav.navbar img.fasel-brand-img {
+    position: static !important;
+    top: 0 !important;
+    height: 42px !important;
+    width: auto !important;
+    max-height: 42px !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: 0 !important;
+}
+
+.fasel-logo-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+.fasel-nav-container {
+    max-width: 1400px !important;
+    width: 100% !important;
+    padding: 0 24px !important;
+    margin: 0 auto !important;
+}
+
+.fasel-nav-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    flex-wrap: nowrap !important;
+    min-height: 62px !important;
+    position: relative !important;
+}
+
+.fasel-nav-logo {
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    margin-right: 15px !important;
+}
+
+.fasel-nav-cta {
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    margin-left: 15px !important;
+}
+
+/* Desktop: 1 Single Row, Compact font, Never 2 rows/layers */
+@media (min-width: 992px) {
+    .fasel-nav-menu-wrap {
+        flex: 1 1 auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-width: 0 !important;
+    }
+
+    ul.nav.navbar-nav.fasel-compact-nav {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 2px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        white-space: nowrap !important;
+        float: none !important;
+    }
+
+    ul.nav.navbar-nav.fasel-compact-nav > li {
+        display: inline-flex !important;
+        align-items: center !important;
+        float: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        position: relative !important;
+    }
+
+    /* Compact sizing as explicitly requested: font slightly smaller, sleek padding */
+    ul.nav.navbar-nav.fasel-compact-nav > li > a {
+        font-size: 13.5px !important;
+        font-weight: 600 !important;
+        letter-spacing: -0.15px !important;
+        padding: 8px 11px !important;
+        color: #1e293b !important;
+        border-radius: 6px !important;
+        transition: all 0.2s ease !important;
+        white-space: nowrap !important;
+        text-transform: none !important;
+        line-height: 1.4 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+    }
+
+    ul.nav.navbar-nav.fasel-compact-nav > li > a:hover,
+    ul.nav.navbar-nav.fasel-compact-nav > li.active > a,
+    ul.nav.navbar-nav.fasel-compact-nav > li.dropdown.on > a {
+        color: #d90429 !important;
+        background-color: rgba(217, 4, 41, 0.06) !important;
+    }
+
+    /* Dropdown menu styling */
+    ul.nav.navbar-nav.fasel-compact-nav li.dropdown ul.dropdown-menu {
+        background: #ffffff !important;
+        border-radius: 10px !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12) !important;
+        border: 1px solid #e2e8f0 !important;
+        padding: 8px 0 !important;
+        min-width: 220px !important;
+    }
+
+    ul.nav.navbar-nav.fasel-compact-nav li.dropdown ul.dropdown-menu li a {
+        font-size: 13px !important;
+        font-weight: 500 !important;
+        padding: 9px 18px !important;
+        color: #334155 !important;
+        white-space: nowrap !important;
+        display: block !important;
+        transition: all 0.15s ease !important;
+    }
+
+    ul.nav.navbar-nav.fasel-compact-nav li.dropdown ul.dropdown-menu li a:hover {
+        color: #d90429 !important;
+        background-color: #fff1f2 !important;
+        padding-left: 22px !important;
+    }
+}
+
+/* CTA Button ("Get Consultant") */
+.fasel-consultant-btn,
+.attr-right .attr-nav li.button a {
+    background: #d90429 !important;
+    color: #ffffff !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    padding: 8px 20px !important;
+    border-radius: 50px !important;
+    white-space: nowrap !important;
+    box-shadow: 0 3px 12px rgba(217, 4, 41, 0.3) !important;
+    transition: all 0.2s ease !important;
+    display: inline-block !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
+}
+
+.fasel-consultant-btn:hover,
+.attr-right .attr-nav li.button a:hover {
+    background: #b90322 !important;
+    color: #ffffff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 5px 16px rgba(217, 4, 41, 0.4) !important;
+}
+
+/* Mobile drawer adjustments */
+@media (max-width: 991px) {
+    .fasel-nav-inner {
+        min-height: 56px !important;
+    }
+    .fasel-brand-img {
+        height: 36px !important;
+    }
+    nav.navbar.fasel-white-gradient-nav {
+        top: 0 !important;
+    }
+}
+
+/* Desktop positioning: non-sticky sits below the 48px top-bar; sticky sticks at top: 0 */
+@media (min-width: 992px) {
+    nav.navbar.fasel-white-gradient-nav:not(.sticked) {
+        top: 48px !important;
+    }
+    nav.navbar.fasel-white-gradient-nav.sticked {
+        top: 0 !important;
+        position: fixed !important;
+    }
+}
+
