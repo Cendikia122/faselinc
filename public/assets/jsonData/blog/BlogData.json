@@ -1,13 +1,13 @@
 [
     {
         "id": 1,
-        "date": "21 September 2026",
+        "date": "29 September 2026",
         "dateIcon": "far fa-calendar-alt",
-        "author": "Ardian Rangga",
+        "author": "Fasel Consulting",
         "authorIcon": "far fa-user-circle",
-        "title": "Experiential Learning dalam Leadership: Strategi Efektif Mengembangkan Kompetensi Karyawan",
-        "slug": "experiential-learning-dalam-leadership",
-        "text": "Banyak studi menunjukkan bahwa 70% efektivitas pembelajaran kepemimpinan berasal dari pengalaman langsung (on-the-job learning), bukan dari ruang kelas semata. Inilah yang membuat Experiential Learning menjadi inti dari Leadership Development Program modern.",
+        "title": "Tes artikel",
+        "slug": "tes-artikel",
+        "text": "tes",
         "btnText": "Baca Selengkapnya",
         "btnIcon": "fas fa-angle-right",
         "thumbFull": "ar.jpg",

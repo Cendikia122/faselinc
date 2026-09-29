@@ -9,9 +9,6 @@ const ProjectStyle1 = ({ initialEvents = [] }) => {
     const [events, setEvents] = useState(initialEvents && initialEvents.length > 0 ? initialEvents : Project1Data);
 
     useEffect(() => {
-        // Jika data sudah di-supply lewat SSR, tidak perlu fetch ulang yang memperlambat halaman
-        if (initialEvents && initialEvents.length > 0) return;
-
         async function fetchEvents() {
             try {
                 const res = await fetch('/api/events');
@@ -24,7 +21,7 @@ const ProjectStyle1 = ({ initialEvents = [] }) => {
             }
         }
         fetchEvents();
-    }, [initialEvents]);
+    }, []);
 
     return (
         <>

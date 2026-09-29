@@ -7,9 +7,6 @@ const BlogStyle1 = ({ sectionClass, initialBlogs = [] }) => {
     const [isLoaded, setIsLoaded] = useState(initialBlogs.length > 0);
 
     useEffect(() => {
-        // Jika data sudah di-supply lewat SSR, tidak perlu fetch ulang yang memperlambat browser
-        if (initialBlogs && initialBlogs.length > 0) return;
-
         async function fetchBlogs() {
             try {
                 const res = await fetch('/api/blogs');
@@ -25,7 +22,7 @@ const BlogStyle1 = ({ sectionClass, initialBlogs = [] }) => {
             }
         }
         fetchBlogs();
-    }, [initialBlogs]);
+    }, []);
 
     // Jangan tampilkan section jika tidak ada artikel dari admin
     if (isLoaded && blogs.length === 0) {

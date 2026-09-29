@@ -1,16 +1,16 @@
 [
   {
     "id": 1,
-    "title": "Experiential Learning dalam Leadership: Strategi Efektif Mengembangkan Kompetensi Karyawan",
-    "slug": "experiential-learning-dalam-leadership",
-    "author": "Ardian Rangga",
-    "date": "21 September 2026",
-    "thumb": "ar.jpg",
-    "thumb_full": "ar.jpg",
-    "excerpt": "Banyak studi menunjukkan bahwa 70% efektivitas pembelajaran kepemimpinan berasal dari pengalaman langsung (on-the-job learning), bukan dari ruang kelas semata.",
-    "content": "<p>Dalam era bisnis yang dinamis saat ini, metode pelatihan konvensional seperti presentasi satu arah di ruang kelas sering kali kurang efektif dalam menghasilkan perubahan perilaku jangka panjang. Di sinilah <strong>Experiential Learning</strong> memegang peranan krusial.</p><p>Experiential Learning berfokus pada siklus belajar dari pengalaman langsung, refleksi kritis, konseptualisasi ide, hingga aplikasi nyata di tempat kerja. Melalui simulasi tantangan bisnis dan dinamika kelompok, setiap anggota tim dapat mengenali kekuatan serta area pengembangan mereka secara nyata.</p><h3>Manfaat Utama untuk Organisasi:</h3><ul><li>Meningkatkan komunikasi dan rasa saling percaya (trust) antar karyawan.</li><li>Menginternalisasi nilai-nilai inti perusahaan (core values) secara mendalam.</li><li>Mengasah kemampuan pemecahan masalah secara kolaboratif di bawah tekanan.</li></ul><p>Fasel Consulting siap membantu organisasi Anda merancang program pelatihan berbasis pengalaman yang disesuaikan dengan kebutuhan spesifik tim Anda.</p>",
-    "tags": "Experiential Learning, Training",
+    "title": "Tes artikel",
+    "slug": "tes-artikel",
+    "author": "Fasel Consulting",
+    "date": "29 September 2026",
+    "thumb": "/assets/img/blog/ar.jpg",
+    "thumb_full": "/assets/img/blog/ar.jpg",
+    "excerpt": "tes",
+    "content": "<p>tes</p>",
+    "tags": "Training, Experiential Learning",
     "status": "published",
-    "created_at": "2026-09-29T13:01:51.703Z"
+    "created_at": "2026-09-29T16:00:00.000Z"
   }
 ]

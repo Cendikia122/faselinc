@@ -13,6 +13,9 @@ import TestimonialStyle1 from "@/components/testimonial/TestimonialStyle1";
 import { getBlogs, getEvents } from "@/lib/storage";
 import React from "react";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // ✅ SEO Komprehensif Beranda Fasel Consulting
 export const metadata = {
   title: "Fasel Consulting | Pelatihan Kepemimpinan & Experiential Learning Indonesia",

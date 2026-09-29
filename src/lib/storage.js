@@ -145,26 +145,15 @@ export function invalidateCache() {
 // ==========================================
 
 export async function getBlogs(limit = null, all = false) {
-  // Cek cache memori terlebih dahulu untuk kecepatan maksimal jika hanya butuh published
-  if (!all && memoryCache.blogsPublished && (Date.now() - memoryCache.blogsPublishedTime < 60000)) {
-    const cached = memoryCache.blogsPublished;
-    const result = limit ? cached.slice(0, limit) : cached;
-    return { source: 'cache', data: result };
-  }
-
-  let finalBlogs = [];
-  let source = 'json';
-
-  // 1. Coba ambil dari MySQL
+  // 1. Coba ambil dari MySQL terlebih dahulu
   try {
     let sql = all
       ? 'SELECT * FROM blogs ORDER BY id DESC'
-      : 'SELECT * FROM blogs WHERE status = "published" ORDER BY id DESC';
+      : 'SELECT * FROM blogs WHERE status = "published" OR status IS NULL OR status = "" ORDER BY id DESC';
     if (limit) sql += ` LIMIT ${limit}`;
     const rows = await query(sql);
     if (Array.isArray(rows)) {
-      finalBlogs = rows;
-      source = 'mysql';
+      return { source: 'mysql', data: rows };
     }
   } catch (dbErr) {
     if (process.env.DEBUG_MYSQL === 'true') {
@@ -172,21 +161,11 @@ export async function getBlogs(limit = null, all = false) {
     }
   }
 
-  // 2. Fallback ke JSON Storage jika MySQL tidak ada data atau offline
-  if (finalBlogs.length === 0 && source !== 'mysql') {
-    const blogs = readJson(BLOGS_FILE);
-    const filtered = all ? blogs : blogs.filter(b => b.status !== 'draft');
-    finalBlogs = limit ? filtered.slice(0, limit) : filtered;
-    source = 'json';
-  }
-
-  // Simpan ke cache jika mengambil data published
-  if (!all && finalBlogs.length > 0 && !limit) {
-    memoryCache.blogsPublished = finalBlogs;
-    memoryCache.blogsPublishedTime = Date.now();
-  }
-
-  return { source, data: finalBlogs };
+  // 2. Fallback ke JSON Storage HANYA jika MySQL offline/error
+  const blogs = readJson(BLOGS_FILE);
+  const filtered = all ? blogs : blogs.filter(b => b.status !== 'draft');
+  const result = limit ? filtered.slice(0, limit) : filtered;
+  return { source: 'json', data: result };
 }
 
 export async function getBlogByIdOrSlug(identifier) {
@@ -336,26 +315,15 @@ export async function deleteBlog(id) {
 // ==========================================
 
 export async function getEvents(limit = null, all = false) {
-  // Cek cache memori terlebih dahulu untuk kecepatan maksimal
-  if (!all && memoryCache.eventsActive && (Date.now() - memoryCache.eventsActiveTime < 60000)) {
-    const cached = memoryCache.eventsActive;
-    const result = limit ? cached.slice(0, limit) : cached;
-    return { source: 'cache', data: result };
-  }
-
-  let finalEvents = [];
-  let source = 'json';
-
-  // 1. Coba ambil dari MySQL
+  // 1. Coba ambil dari MySQL terlebih dahulu
   try {
     let sql = all
       ? 'SELECT * FROM events ORDER BY id DESC'
-      : 'SELECT * FROM events WHERE status = "active" ORDER BY id DESC';
+      : 'SELECT * FROM events WHERE status = "active" OR status IS NULL OR status = "" ORDER BY id DESC';
     if (limit) sql += ` LIMIT ${limit}`;
     const rows = await query(sql);
     if (Array.isArray(rows)) {
-      finalEvents = rows;
-      source = 'mysql';
+      return { source: 'mysql', data: rows };
     }
   } catch (dbErr) {
     if (process.env.DEBUG_MYSQL === 'true') {
@@ -363,21 +331,11 @@ export async function getEvents(limit = null, all = false) {
     }
   }
 
-  // 2. Fallback ke JSON Storage
-  if (finalEvents.length === 0 && source !== 'mysql') {
-    const events = readJson(EVENTS_FILE);
-    const filtered = all ? events : events.filter(e => e.status !== 'inactive');
-    finalEvents = limit ? filtered.slice(0, limit) : filtered;
-    source = 'json';
-  }
-
-  // Simpan ke cache jika mengambil data active
-  if (!all && finalEvents.length > 0 && !limit) {
-    memoryCache.eventsActive = finalEvents;
-    memoryCache.eventsActiveTime = Date.now();
-  }
-
-  return { source, data: finalEvents };
+  // 2. Fallback ke JSON Storage HANYA jika MySQL offline/error
+  const events = readJson(EVENTS_FILE);
+  const filtered = all ? events : events.filter(e => e.status !== 'inactive');
+  const result = limit ? filtered.slice(0, limit) : filtered;
+  return { source: 'json', data: result };
 }
 
 export async function getEventById(id) {

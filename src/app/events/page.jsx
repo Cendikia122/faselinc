@@ -3,6 +3,9 @@ import LayoutStyle7 from "@/components/Layouts/LayoutStyle7";
 import Link from "next/link";
 import { getEvents } from "@/lib/storage";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // ✅ SEO Komprehensif Halaman Pelatihan & Event
 export const metadata = {
   title: "Jadwal Pelatihan & Event Kepemimpinan | Fasel Consulting",

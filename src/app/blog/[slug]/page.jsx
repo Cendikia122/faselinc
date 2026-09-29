@@ -3,6 +3,9 @@ import LayoutStyle7 from "@/components/Layouts/LayoutStyle7";
 import Link from "next/link";
 import { getBlogByIdOrSlug } from "@/lib/storage";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function generateMetadata({ params }) {
   const blog = await getBlogByIdOrSlug(params.slug);
   if (!blog) {

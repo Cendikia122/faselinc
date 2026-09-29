@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 import { getBlogs, createBlog } from '@/lib/storage';
 import { verifyAdmin } from '@/lib/auth';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // GET: Mengambil semua artikel blog
 export async function GET(request) {
   try {

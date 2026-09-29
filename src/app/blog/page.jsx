@@ -3,6 +3,9 @@ import LayoutStyle7 from "@/components/Layouts/LayoutStyle7";
 import Link from "next/link";
 import { getBlogs } from "@/lib/storage";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export const metadata = {
   title: "Artikel & Wawasan Experiential Learning | Fasel Consulting",
   description:
