@@ -4,18 +4,21 @@
    ========================================================================== */
 
 /* Navbar White Gradient Background - crystal clear over dark hero images */
-nav.navbar.fasel-white-gradient-nav,
-nav.navbar.navbar-style-one,
-nav.navbar.validnavs.navbar-fixed,
-nav.navbar.validnavs.navbar-sticky,
-nav.navbar.validnavs.sticked {
+nav.navbar.fasel-white-gradient-nav {
     background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.97) 65%, rgba(248, 250, 252, 0.94) 100%) !important;
     backdrop-filter: blur(14px) !important;
     -webkit-backdrop-filter: blur(14px) !important;
     box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08) !important;
     border-bottom: 1px solid rgba(226, 232, 240, 0.85) !important;
-    top: 0 !important;
     padding: 6px 0 !important;
+}
+
+/* Juga paksa semua navbar bawaan template pakai background putih */
+nav.navbar.navbar-style-one,
+nav.navbar.validnavs.sticked {
+    background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.97) 65%, rgba(248, 250, 252, 0.94) 100%) !important;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.85) !important;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08) !important;
 }
 
 /* Eradicate the template's weird skewed polygon cutting through the navbar */
@@ -204,10 +207,14 @@ nav.navbar img.fasel-brand-img {
     }
 }
 
-/* Desktop positioning: non-sticky sits below the 48px top-bar; sticky sticks at top: 0 */
+/* Desktop positioning:
+   - Saat belum scroll: navbar ikut flow dokumen di bawah top bar (position: relative)
+   - Saat sticked (sudah scroll): navbar melekat di top: 0 layar (position: fixed)
+*/
 @media (min-width: 992px) {
     nav.navbar.fasel-white-gradient-nav:not(.sticked) {
-        top: 48px !important;
+        position: relative !important;
+        top: auto !important;
     }
     nav.navbar.fasel-white-gradient-nav.sticked {
         top: 0 !important;
