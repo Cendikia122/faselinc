@@ -11,11 +11,16 @@ const SingleBlog1 = ({ blog }) => {
     return (
         <div className="col-xl-4 col-md-6 mb-30 wow fadeInUp" data-wow-delay={animationDelay ? [animationDelay] : undefined}>
             <div className="blog-style-one">
-                <div className="thumb" style={{ height: '240px', overflow: 'hidden' }}>
+                <div className="thumb" style={{ height: '240px', overflow: 'hidden', background: '#f0f0f0' }}>
                     <Link href={targetUrl}>
                         <img
                             src={imgSrc}
-                            alt={title || "Blog Thumb"}
+                            alt={title || "Blog Fasel Consulting"}
+                            width={600}
+                            height={240}
+                            loading="lazy"
+                            decoding="async"
+                            fetchPriority="low"
                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                         />
                     </Link>

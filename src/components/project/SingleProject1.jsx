@@ -17,7 +17,16 @@ const SingleProject1 = ({ project }) => {
                     <div className="row align-bottom">
                         <div className="col-lg-7 pr-0 pr-md-15 pr-xs-15 pl-md-15 pl-xs-15">
                             <div className="thumb">
-                                <img src={imgSrc} alt={title || "Event Fasel"} style={{ width: '100%', height: 'auto', borderRadius: '8px' }} />
+                                <img
+                                    src={imgSrc}
+                                    alt={title || "Pelatihan & Event Fasel Consulting"}
+                                    width={800}
+                                    height={500}
+                                    loading="lazy"
+                                    decoding="async"
+                                    fetchPriority="low"
+                                    style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
+                                />
                             </div>
                         </div>
                         <div className="col-lg-5 pl-0 pl-md-15 pl-xs-15 pr-md-15 pr-xs-15">

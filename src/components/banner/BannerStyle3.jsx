@@ -85,9 +85,9 @@ const BannerStyle3 = () => {
                                 prevEl: ".swiper-button-prev"
                             }}
                         >
-                            {Banner3Data.map(banner =>
+                            {Banner3Data.map((banner, index) =>
                                 <SwiperSlide key={banner.id} className='banner-style-three'>
-                                    <SingleBanner3 banner={banner} />
+                                    <SingleBanner3 banner={banner} isPriority={index === 0} />
                                 </SwiperSlide>
                             )}
                         </Swiper>

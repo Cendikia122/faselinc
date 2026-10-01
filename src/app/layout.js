@@ -24,8 +24,8 @@ import { Manrope, Outfit } from "next/font/google";
 import Script from 'next/script';
 import FbPixelClient from '@/components/FbPixelClient';
 
-const manrope = Manrope({ subsets: ["latin"] });
-const outfit = Outfit({ subsets: ["latin"] });
+const manrope = Manrope({ subsets: ["latin"], display: "swap", preload: true });
+const outfit = Outfit({ subsets: ["latin"], display: "swap", preload: true });
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.faselconsulting.id'),

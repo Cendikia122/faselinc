@@ -3,12 +3,23 @@ import Link from 'next/link';
 import React from 'react';
 import shape43 from '@/assets/img/shape/43.png'
 
-const SingleBanner3 = ({ banner }) => {
+const SingleBanner3 = ({ banner, isPriority = false }) => {
     const { bgThumb, subTitle, title, btnText } = banner
 
     return (
         <>
-            <div className="banner-thumb bg-cover" style={{ background: `url(/assets/img/banner/${bgThumb})` }}></div>
+            {/* ✅ Preload LCP image untuk banner pertama */}
+            {isPriority && (
+                <link
+                    rel="preload"
+                    as="image"
+                    href={`/assets/img/banner/${bgThumb}`}
+                />
+            )}
+            <div
+                className="banner-thumb bg-cover"
+                style={{ background: `url(/assets/img/banner/${bgThumb}) center/cover no-repeat` }}
+            />
             <div className="container">
                 <div className="row align-center">
                     <div className="col-xl-6 col-lg-7 col-md-10">
