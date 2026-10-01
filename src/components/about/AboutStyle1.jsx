@@ -44,16 +44,19 @@ const AboutStyle1 = () => {
         <>
             <div className="about-style-one-area default-padding">
                 <div className="shape-animated-left">
-                    <Image src={anim1Thumb} alt="Image Not Found" />
-                    <Image src={anim2Thumb} alt="Image Not Found" />
+                    <Image src={anim1Thumb} alt="Experiential Learning Indonesia — Fasel Consulting" />
+                    <Image src={anim2Thumb} alt="Pelatihan Kepemimpinan Perusahaan" />
                 </div>
                 <div className="container">
                     <div className="row align-center">
                         <div className="about-style-one col-xl-6 col-lg-5">
                             <div className="h4 sub-heading">LEARN, LEAD, GROW!</div>
-                            <h2 className="title mb-25">Empowering Leaders, Transforming Futures</h2>
+                            <h2 className="title mb-25">Experiential Learning Indonesia untuk Pemimpin yang Berdampak</h2>
                             <p>
-                            With years of experience in corporate training, team building, and personal development, we have collaborated with industry leaders and organizations to foster a culture of excellence and continuous learning. Our mission is simple: to inspire, educate, and transform individuals into future-ready leaders.
+                                Fasel Consulting adalah mitra strategis <strong>Pelatihan Kepemimpinan</strong> dan <strong>Experiential Learning Indonesia</strong> terpercaya. Dengan pengalaman mendalam dalam <strong>Leadership Development Program</strong>, corporate training, dan team building, kami telah berkolaborasi dengan ratusan organisasi dan korporasi untuk membangun budaya kepemimpinan yang adaptif dan produktif.
+                            </p>
+                            <p>
+                                Program <strong>Pelatihan Kepemimpinan</strong> kami dirancang berbasis metode <em>Experiential Learning</em> — belajar melalui pengalaman nyata, bukan sekadar teori. Hasilnya: pemimpin yang siap menghadapi tantangan organisasi modern.
                             </p>
                             <div className="owner-info">
                                 <div className="left-info">

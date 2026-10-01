@@ -16,37 +16,45 @@ import React from "react";
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-// ✅ SEO Komprehensif Beranda Fasel Consulting
+// ✅ SEO Komprehensif Beranda Fasel Consulting — Dioptimasi penuh
 export const metadata = {
-  title: "Fasel Consulting | Pelatihan Kepemimpinan & Experiential Learning Indonesia",
+  // ✅ Keyword tepat di awal title (placement fixed), panjang optimal
+  title: "Experiential Learning Indonesia — Pelatihan Kepemimpinan & Leadership Development Program | Fasel Consulting",
+  // ✅ Description 155 karakter, mengandung ketiga exact keyword
   description:
-    "Fasel Consulting adalah konsultan pelatihan SDM, kepemimpinan (leadership), dan experiential learning terkemuka di Indonesia. Kami membantu organisasi dan korporasi mengembangkan budaya tim yang solid, kepemimpinan adaptif, dan produktivitas tinggi.",
+    "Fasel Consulting: spesialis Experiential Learning Indonesia, Pelatihan Kepemimpinan, dan Leadership Development Program untuk korporasi & organisasi terbaik.",
+  // ✅ Meta keywords berisi exact keyword phrase
   keywords: [
     "Experiential Learning Indonesia",
     "Pelatihan Kepemimpinan",
     "Leadership Development Program",
+    "Pelatihan Kepemimpinan Perusahaan",
     "Corporate Training Jakarta",
     "Team Building Bogor",
     "Outbound Training Perusahaan",
     "Pengembangan SDM",
+    "In-House Training",
+    "Pelatihan Karyawan",
+    "Konsultan SDM Indonesia",
     "Fasel Consulting",
-    "Ardian Rangga"
+    "Ardian Rangga",
   ],
   alternates: {
-    canonical: "https://faselconsulting.com",
+    canonical: "https://www.faselconsulting.id",
   },
   openGraph: {
-    title: "Fasel Consulting | Pelatihan Kepemimpinan & Experiential Learning",
+    title: "Experiential Learning Indonesia | Pelatihan Kepemimpinan — Fasel Consulting",
     description:
-      "Mitra strategis transformasi budaya tim dan akselerasi kepemimpinan berbasis metode Experiential Learning terbaik di Indonesia.",
-    url: "https://faselconsulting.com",
+      "Fasel Consulting: spesialis Experiential Learning Indonesia, Pelatihan Kepemimpinan, dan Leadership Development Program untuk korporasi & organisasi terbaik.",
+    url: "https://www.faselconsulting.id",
     siteName: "Fasel Consulting",
     images: [
       {
         url: "/assets/img/projects/faselevent1.jpg",
         width: 1200,
         height: 630,
-        alt: "Fasel Consulting Experiential Learning",
+        // ✅ Alt image mengandung exact keyword
+        alt: "Fasel Consulting — Experiential Learning Indonesia & Pelatihan Kepemimpinan",
       },
     ],
     locale: "id_ID",
@@ -54,9 +62,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fasel Consulting | Pelatihan Kepemimpinan & Experiential Learning",
+    title: "Experiential Learning Indonesia | Pelatihan Kepemimpinan — Fasel Consulting",
     description:
-      "Mitra strategis transformasi budaya tim dan akselerasi kepemimpinan berbasis metode Experiential Learning terbaik di Indonesia.",
+      "Fasel Consulting: spesialis Experiential Learning Indonesia, Pelatihan Kepemimpinan, dan Leadership Development Program untuk korporasi.",
     images: ["/assets/img/projects/faselevent1.jpg"],
   },
 };

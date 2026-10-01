@@ -28,38 +28,44 @@ const manrope = Manrope({ subsets: ["latin"] });
 const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://faselconsulting.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.faselconsulting.id'),
   title: {
-    default: "Fasel Consulting | Pelatihan Kepemimpinan & Experiential Learning Indonesia",
+    // ✅ Default title dimulai dengan exact keyword
+    default: "Experiential Learning Indonesia | Pelatihan Kepemimpinan & Leadership Development Program — Fasel Consulting",
     template: "%s | Fasel Consulting",
   },
+  // ✅ Description 155 karakter, exact keywords tercantum
   description:
-    "Fasel Consulting adalah konsultan pelatihan SDM dan kepemimpinan berbasis Experiential Learning terkemuka di Indonesia. Spesialisasi dalam Leadership Transformation, Team Building, dan In-House Training perusahaan.",
+    "Fasel Consulting: spesialis Experiential Learning Indonesia, Pelatihan Kepemimpinan, dan Leadership Development Program untuk korporasi & organisasi terbaik.",
   keywords: [
     "Experiential Learning Indonesia",
-    "Pelatihan Kepemimpinan Perusahaan",
+    "Pelatihan Kepemimpinan",
     "Leadership Development Program",
+    "Pelatihan Kepemimpinan Perusahaan",
     "Team Building Bogor",
     "Outbound Training Jakarta",
+    "In-House Training Perusahaan",
     "Fasel Consulting",
     "Corporate Training SDM",
     "Pelatihan Karyawan",
+    "Konsultan SDM Indonesia",
+    "Ardian Rangga",
   ],
   alternates: {
-    canonical: "https://faselconsulting.com",
+    canonical: "https://www.faselconsulting.id",
   },
   openGraph: {
-    title: "Fasel Consulting | Experiential Learning & Leadership Transformation",
+    title: "Experiential Learning Indonesia | Pelatihan Kepemimpinan — Fasel Consulting",
     description:
-      "Tingkatkan kapasitas kepemimpinan dan kekompakan tim perusahaan Anda bersama program Experiential Learning Fasel Consulting.",
-    url: "https://faselconsulting.com",
+      "Fasel Consulting: spesialis Experiential Learning Indonesia, Pelatihan Kepemimpinan, dan Leadership Development Program untuk korporasi & organisasi terbaik.",
+    url: "https://www.faselconsulting.id",
     siteName: "Fasel Consulting",
     images: [
       {
         url: "/assets/img/projects/faselevent1.jpg",
         width: 1200,
         height: 630,
-        alt: "Fasel Consulting - Experiential Learning & Leadership Training",
+        alt: "Fasel Consulting — Experiential Learning Indonesia & Pelatihan Kepemimpinan",
       },
     ],
     locale: "id_ID",
@@ -67,18 +73,33 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fasel Consulting | Experiential Learning & Leadership Training",
+    title: "Experiential Learning Indonesia | Pelatihan Kepemimpinan — Fasel Consulting",
     description:
-      "Konsultan pelatihan SDM dan kepemimpinan berbasis Experiential Learning terdepan di Indonesia.",
+      "Fasel Consulting: spesialis Experiential Learning Indonesia, Pelatihan Kepemimpinan, dan Leadership Development Program untuk korporasi.",
     images: ["/assets/img/projects/faselevent1.jpg"],
   },
 };
 
 export default function RootLayout({ children }) {
+  const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-XXXXXXXXXX';
   return (
-    <html lang="en">
+    <html lang="id">
       <body className={`${outfit.className} ${manrope.className}`}>
-        {/* Meta Pixel - initialize after interactive */}
+        {/* ✅ Google Analytics GA4 — fix "Google Analytics Not Found" error */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}', { page_path: window.location.pathname });
+          `}
+        </Script>
+
+        {/* Meta Pixel - Facebook Ads */}
         <Script id="fb-pixel-init" strategy="afterInteractive">
           {`!function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?

@@ -2,36 +2,36 @@
     {
         "id": 1,
         "bgThumb": "banner1.png",
-        "subTitle": "Leadership Class",
-        "title": "Be the Leader of Tomorrow, Start Today!",
-        "btnText": "Contact Us!",
+        "subTitle": "Experiential Learning Indonesia",
+        "title": "Pelatihan Kepemimpinan untuk Pemimpin Masa Depan",
+        "btnText": "Konsultasi Gratis",
         "shapeThumb": "43.png",
         "listInfo": [
             {
                 "id": 1,
-                "listData": "Special Program to Youth Leader!"
+                "listData": "Leadership Development Program terbukti & terstruktur"
             },
             {
                 "id": 2,
-                "listData": "Build a productive personality"
+                "listData": "Dipercaya ratusan perusahaan & organisasi di Indonesia"
             }
         ]
     },
     {
         "id": 2,
         "bgThumb": "banner2.png",
-        "subTitle": "Consulting",
-        "title": "Level Up Your Professional Game",
-        "btnText": "Contact Us!",
+        "subTitle": "Leadership Development Program",
+        "title": "Experiential Learning Indonesia untuk Transformasi Tim",
+        "btnText": "Lihat Program",
         "shapeThumb": "43.png",
         "listInfo": [
             {
                 "id": 1,
-                "listData": "Design Modul Training"
+                "listData": "Pelatihan Kepemimpinan berbasis pengalaman nyata"
             },
             {
                 "id": 2,
-                "listData": "Organizational Development"
+                "listData": "In-House Training & Outbound Training Perusahaan"
             }
         ]
     }
