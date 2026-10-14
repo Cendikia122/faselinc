@@ -40,9 +40,8 @@ const nextConfig = {
     ];
   },
 
-  // ✅ Experimental: CSS & package optimization
+  // ✅ Experimental: package optimization
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ['swiper', 'react-icons'],
   },
 };

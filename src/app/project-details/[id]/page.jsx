@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://faselconsulting.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.faselconsulting.id";
   const postUrl = `${siteUrl}/project-details/${event.id}`;
   const cleanExcerpt = (
     event.short_desc ||
@@ -89,7 +89,7 @@ export default async function ProjectDetailsPage({ params }) {
     );
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://faselconsulting.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.faselconsulting.id";
   const postUrl = `${siteUrl}/project-details/${event.id}`;
   const cleanExcerpt = (
     event.short_desc ||

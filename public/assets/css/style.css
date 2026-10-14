@@ -4091,6 +4091,7 @@ p {
 	color: var(--color-secondary);
 }
 
+.banner-style-three .content h1,
 .banner-style-three .content h2 {
 	font-size: 65px;
 	font-weight: 600;

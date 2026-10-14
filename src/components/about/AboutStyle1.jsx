@@ -64,17 +64,17 @@ const AboutStyle1 = () => {
                                     <span>CEO & Founder</span>
                                 </div>
                                 <div className="right-info">
-                                    <Image src={signatureThumb} alt="Image Not Found" />
+                                    <Image src={signatureThumb} alt="Tanda Tangan Ardian Rangga — Founder Fasel Consulting" />
                                 </div>
                             </div>
                         </div>
                         <div className="about-style-one col-xl-5 offset-xl-1 col-lg-6 offset-lg-1">
                             <div className="about-thumb">
-                                <Image className="wow fadeInRight" src={aboutThumb} alt="Image Not Found" />
+                                <Image className="wow fadeInRight" src={aboutThumb} alt="Pelatihan Kepemimpinan & Experiential Learning Fasel Consulting" />
                                 <About1Card />
                                 <div className="thumb-shape-bottom wow fadeInDown" data-wow-delay="300ms">
-                                    <Image src={anim3Thumb} alt="Image Not Found" />
-                                    <Image src={anim4Thumb} alt="Image Not Found" />
+                                    <Image src={anim3Thumb} alt="Leadership Development Program" />
+                                    <Image src={anim4Thumb} alt="Corporate Training SDM Indonesia" />
                                 </div>
                             </div>
                         </div>

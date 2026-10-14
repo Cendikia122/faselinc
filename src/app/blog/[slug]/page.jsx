@@ -15,7 +15,7 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://faselconsulting.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.faselconsulting.id";
   const cleanExcerpt = (
     blog.excerpt ||
     blog.content?.replace(/<[^>]*>?/gm, "") ||
@@ -92,7 +92,7 @@ export default async function SingleBlogPage({ params }) {
     );
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://faselconsulting.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.faselconsulting.id";
   const cleanExcerpt = (
     blog.excerpt ||
     blog.content?.replace(/<[^>]*>?/gm, "") ||

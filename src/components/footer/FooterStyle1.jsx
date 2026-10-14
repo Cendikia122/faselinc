@@ -25,7 +25,7 @@ const FooterStyle1 = ({ shape, shapeClass, logo, formStyle }) => {
                             <div className="col-lg-4 col-md-6 footer-item pr-50 pr-xs-15">
                                 <div className="f-item about">
                                     <Link href="/">
-                                        {logo ? <Image className="logo" src={logo} alt="Logo" /> : <Image className="logo" src={logoLight} alt="Logo" />}
+                                        {logo ? <Image className="logo" src={logo} alt="Fasel Consulting Logo" /> : <Image className="logo" src={logoLight} alt="Fasel Consulting Logo" />}
                                     </Link>
                                     <p>
                                     🚀 Ready to take your team to the next level with FASEL.inc? Let’s create an unforgettable and impactful experience!

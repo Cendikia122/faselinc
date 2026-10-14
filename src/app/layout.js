@@ -54,6 +54,20 @@ export const metadata = {
   alternates: {
     canonical: "https://www.faselconsulting.id",
   },
+  verification: {
+    google: "google1527a016f64f71ff",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     title: "Experiential Learning Indonesia | Pelatihan Kepemimpinan — Fasel Consulting",
     description:
@@ -116,7 +130,8 @@ fbq('track', 'PageView');`}
         {/* Fallback for no-JS */}
         <noscript>
           <img height="1" width="1" style={{display:'none'}}
-            src="https://www.facebook.com/tr?id=1396576578921257&ev=PageView&noscript=1" />
+            src="https://www.facebook.com/tr?id=1396576578921257&ev=PageView&noscript=1"
+            alt="" />
         </noscript>
 
         <ToastContainer />

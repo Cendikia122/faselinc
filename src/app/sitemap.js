@@ -1,7 +1,7 @@
 import { getBlogs, getEvents } from '@/lib/storage';
 
 export default async function sitemap() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://faselconsulting.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.faselconsulting.id';
 
   const [blogsRes, eventsRes] = await Promise.all([
     getBlogs(),

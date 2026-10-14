@@ -19,15 +19,31 @@ export const metadata = {
     "Corporate Training Jakarta",
   ],
   alternates: {
-    canonical: "https://faselconsulting.com/blog",
+    canonical: "https://www.faselconsulting.id/blog",
   },
   openGraph: {
     title: "Artikel & Wawasan Experiential Learning | Fasel Consulting",
     description:
       "Kumpulan artikel, tips, dan wawasan seputar leadership development, experiential learning, team building, dan strategi pengembangan SDM perusahaan dari Fasel Consulting.",
-    url: "https://faselconsulting.com/blog",
+    url: "https://www.faselconsulting.id/blog",
     siteName: "Fasel Consulting",
+    images: [
+      {
+        url: "/assets/img/projects/faselevent1.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Artikel & Wawasan Fasel Consulting",
+      },
+    ],
+    locale: "id_ID",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Artikel & Wawasan Experiential Learning | Fasel Consulting",
+    description:
+      "Kumpulan wawasan seputar leadership development dan experiential learning.",
+    images: ["/assets/img/projects/faselevent1.jpg"],
   },
 };
 

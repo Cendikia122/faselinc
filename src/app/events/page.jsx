@@ -21,13 +21,13 @@ export const metadata = {
     "Fasel Consulting"
   ],
   alternates: {
-    canonical: "https://faselconsulting.com/events",
+    canonical: "https://www.faselconsulting.id/events",
   },
   openGraph: {
     title: "Jadwal Pelatihan & Event Kepemimpinan | Fasel Consulting",
     description:
       "Tingkatkan performa tim dan kapasitas manajerial organisasi Anda melalui pelatihan experiential learning terbaik.",
-    url: "https://faselconsulting.com/events",
+    url: "https://www.faselconsulting.id/events",
     siteName: "Fasel Consulting",
     images: [
       {
@@ -61,7 +61,7 @@ export default async function EventsListingPage() {
         "provider": {
           "@type": "Organization",
           "name": "Fasel Consulting",
-          "sameAs": "https://faselconsulting.com"
+          "sameAs": "https://www.faselconsulting.id"
         }
       }
     }))

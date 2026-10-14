@@ -5,8 +5,12 @@ import TestimonialStyle1 from '@/components/testimonial/TestimonialStyle1';
 import React from 'react';
 
 export const metadata = {
-    title: "Consua - Consulting Business - Pricing"
-}
+    title: "Investasi & Paket Pelatihan | Fasel Consulting",
+    description: "Informasi paket investasi pelatihan kepemimpinan, experiential learning program, dan corporate training Fasel Consulting.",
+    alternates: {
+        canonical: "https://www.faselconsulting.id/pricing",
+    },
+};
 
 const PricingPage = () => {
     return (

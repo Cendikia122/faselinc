@@ -79,23 +79,45 @@ const Home1 = async () => {
   const initialBlogs = blogsRes?.data || [];
   const initialEvents = eventsRes?.data || [];
 
-  // Schema.org Structured Data untuk Google Knowledge Graph
+  // Schema.org Structured Data untuk Google Knowledge Graph & Rich Results
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Fasel Consulting",
-    "url": "https://faselconsulting.com",
-    "logo": "https://faselconsulting.com/assets/img/fasellogo.png",
-    "image": "https://faselconsulting.com/assets/img/projects/faselevent1.jpg",
-    "description": "Konsultan pelatihan kepemimpinan dan experiential learning terkemuka di Indonesia.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Bogor",
-      "addressRegion": "Jawa Barat",
-      "addressCountry": "ID"
-    },
-    "telephone": "+6281298319944",
-    "priceRange": "$$"
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://www.faselconsulting.id/#website",
+        "url": "https://www.faselconsulting.id",
+        "name": "Fasel Consulting",
+        "description": "Fasel Consulting: spesialis Experiential Learning Indonesia, Pelatihan Kepemimpinan, dan Leadership Development Program.",
+        "publisher": {
+          "@id": "https://www.faselconsulting.id/#organization"
+        },
+        "inLanguage": "id-ID"
+      },
+      {
+        "@type": ["Organization", "ProfessionalService"],
+        "@id": "https://www.faselconsulting.id/#organization",
+        "name": "Fasel Consulting",
+        "url": "https://www.faselconsulting.id",
+        "logo": "https://www.faselconsulting.id/assets/img/fasellogo.png",
+        "image": "https://www.faselconsulting.id/assets/img/projects/faselevent1.jpg",
+        "description": "Konsultan pelatihan kepemimpinan, experiential learning, dan corporate team building terkemuka di Indonesia.",
+        "telephone": "+6281298319944",
+        "email": "faselconsulting@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bogor",
+          "addressRegion": "Jawa Barat",
+          "addressCountry": "ID"
+        },
+        "priceRange": "$$",
+        "sameAs": [
+          "https://www.instagram.com/fasel.inc/",
+          "https://www.youtube.com/@faselinc",
+          "https://m.facebook.com/fasel.inc/"
+        ]
+      }
+    ]
   };
 
   return (

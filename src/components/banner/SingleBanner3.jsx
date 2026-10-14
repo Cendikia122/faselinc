@@ -25,7 +25,11 @@ const SingleBanner3 = ({ banner, isPriority = false }) => {
                     <div className="col-xl-6 col-lg-7 col-md-10">
                         <div className="content">
                             <h4>{subTitle}</h4>
-                            <h2>{title}</h2>
+                            {isPriority ? (
+                                <h1>{title}</h1>
+                            ) : (
+                                <h2>{title}</h2>
+                            )}
                             <ul>
                                 {banner.listInfo.map(list =>
                                     <li key={list.id}>{list.listData}</li>

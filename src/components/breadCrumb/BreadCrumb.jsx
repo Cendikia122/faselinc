@@ -8,7 +8,7 @@ const BreadCrumb = ({ breadCrumb, title }) => {
         <>
             <div className="breadcrumb-area bg-cover shadow dark text-center text-light" style={{ backgroundImage: "url(/assets/img/banner/faselcontact.png)" }}>
                 <div className="breadcrum-shape">
-                    <Image src={breadCrumbThumb} alt="Image Not Found" />
+                    <Image src={breadCrumbThumb} alt="Fasel Consulting" />
                 </div>
                 <div className="container">
                     <div className="row">
