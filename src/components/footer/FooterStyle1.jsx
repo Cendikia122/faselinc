@@ -108,6 +108,19 @@ const FooterStyle1 = ({ shape, shapeClass, logo, formStyle }) => {
                         <div className="row">
                             <div className="col-lg-6">
                                 <p>&copy; Copyright {(new Date().getFullYear())}. All Rights Reserved by <a href="https://www.instagram.com/pramoedyabob/" target='_blank'>cendikia</a></p>
+                                <p style={{ fontSize: '11px', marginTop: '4px', opacity: 0.75 }}>
+                                    Website dikembangkan oleh{' '}
+                                    <a
+                                        href="https://www.layanandigital.id"
+                                        target="_blank"
+                                        rel="noopener"
+                                        style={{ color: 'inherit', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: '2px', transition: 'opacity 0.2s' }}
+                                        onMouseEnter={e => e.target.style.opacity = '1'}
+                                        onMouseLeave={e => e.target.style.opacity = '0.85'}
+                                    >
+                                        Ladi (Layanan Digital)
+                                    </a>
+                                </p>
                             </div>
                             <div className="col-lg-6 text-end">
                                 <ul>
