@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import { adminFetch } from "@/lib/apiClient";
 import { compressImage } from "@/lib/imageCompressor";
+import QuillHtmlEditor from "@/components/admin/QuillHtmlEditor";
+import SeoBoosterPanel from "@/components/admin/SeoBoosterPanel";
 
 export default function NewBlogPage() {
   const router = useRouter();
@@ -14,17 +16,26 @@ export default function NewBlogPage() {
 
   const [form, setForm] = useState({
     title: "",
-    author: "Fasel Consulting",
-    tags: "Training, Experiential Learning",
+    slug: "",
+    author: "Ardian Rangga",
+    tags: "Experiential Learning, Leadership Training",
     date: new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }),
     thumb: "1.jpg",
     excerpt: "",
     content: "",
     status: "published",
+    meta_title: "",
+    meta_description: "",
+    keywords: "Experiential Learning Indonesia",
+    canonical_url: "",
   });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleContentChange = (contentHtml) => {
+    setForm((prev) => ({ ...prev, content: contentHtml }));
   };
 
   const handleFileUpload = async (e) => {
@@ -74,7 +85,7 @@ export default function NewBlogPage() {
       const data = await res.json();
 
       if (res.ok && data.success) {
-        toast.success("Artikel blog berhasil dipublikasikan!");
+        toast.success("Artikel blog berhasil disimpan ke database!");
         router.push("/admin/blogs");
       } else {
         toast.error(data.message || "Gagal menyimpan artikel");
@@ -90,8 +101,9 @@ export default function NewBlogPage() {
     <AdminLayout title="Tulis Artikel Blog Baru">
       <div className="row justify-content-center">
         <div className="col-12 col-xl-10">
-          <div className="card border-0 shadow-sm rounded-4 bg-white p-4 p-md-5">
-            <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
+            {/* Main Content Card */}
+            <div className="card border-0 shadow-sm rounded-4 bg-white p-4 p-md-5">
               <div className="row g-4">
                 {/* Title */}
                 <div className="col-12">
@@ -100,7 +112,7 @@ export default function NewBlogPage() {
                     type="text"
                     name="title"
                     className="form-control form-control-lg"
-                    placeholder="Contoh: Pentingnya Experiential Learning untuk Perusahaan"
+                    placeholder="Contoh: Experiential Learning Indonesia untuk Transformasi SDM"
                     value={form.title}
                     onChange={handleChange}
                     required
@@ -114,7 +126,7 @@ export default function NewBlogPage() {
                     type="text"
                     name="author"
                     className="form-control"
-                    placeholder="Fasel Consulting / Nama Trainer"
+                    placeholder="Ardian Rangga / Fasel Consulting"
                     value={form.author}
                     onChange={handleChange}
                   />
@@ -126,7 +138,7 @@ export default function NewBlogPage() {
                     type="text"
                     name="tags"
                     className="form-control"
-                    placeholder="Contoh: Leadership, Team Building, Training"
+                    placeholder="Contoh: Experiential Learning, Leadership, Team Building"
                     value={form.tags}
                     onChange={handleChange}
                   />
@@ -139,7 +151,7 @@ export default function NewBlogPage() {
                     type="text"
                     name="date"
                     className="form-control"
-                    placeholder="Contoh: 24 September 2026"
+                    placeholder="Contoh: 14 Oktober 2026"
                     value={form.date}
                     onChange={handleChange}
                   />
@@ -193,52 +205,61 @@ export default function NewBlogPage() {
                     name="excerpt"
                     className="form-control"
                     rows="2"
-                    placeholder="Ringkasan 1-2 kalimat untuk preview di halaman depan..."
+                    placeholder="Ringkasan 1-2 kalimat untuk preview di kartu artikel..."
                     value={form.excerpt}
                     onChange={handleChange}
                   ></textarea>
                 </div>
 
-                {/* Content */}
+                {/* Quill + HTML + Preview Editor */}
                 <div className="col-12">
-                  <label className="form-label fw-bold">Isi Konten Artikel <span className="text-danger">*</span></label>
-                  <textarea
-                    name="content"
-                    className="form-control font-monospace"
-                    rows="12"
-                    placeholder="Tulis artikel Anda di sini... (Mendukung paragraf HTML seperti <p>, <h3>, <ul>, <li>)"
+                  <label className="form-label fw-bold">
+                    Isi Konten Artikel <span className="text-danger">*</span>
+                  </label>
+                  <QuillHtmlEditor
                     value={form.content}
-                    onChange={handleChange}
-                    required
-                  ></textarea>
-                  <small className="text-muted">Tip: Anda dapat menuliskan teks biasa atau menyisipkan tag HTML sederhana seperti &lt;h3&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;li&gt;, &lt;strong&gt;.</small>
+                    onChange={handleContentChange}
+                    placeholder="Mulai menulis artikel lengkap dengan heading, bullet points, dan kutipan..."
+                  />
                 </div>
 
-                {/* Status & Actions */}
-                <div className="col-12 d-flex justify-content-between align-items-center pt-3 border-top">
-                  <Link href="/admin/blogs" className="btn btn-outline-secondary">
-                    <i className="fas fa-arrow-left me-1"></i> Batal
-                  </Link>
-
-                  <button
-                    type="submit"
-                    className="btn btn-primary px-4 py-2 fw-bold shadow-sm d-flex align-items-center gap-2"
-                    disabled={submitting}
-                  >
-                    {submitting ? (
-                      <>
-                        <span className="spinner-border spinner-border-sm"></span> Menyimpan...
-                      </>
-                    ) : (
-                      <>
-                        <i className="fas fa-paper-plane"></i> Publikasikan Artikel
-                      </>
-                    )}
-                  </button>
+                {/* Status */}
+                <div className="col-12 col-md-6">
+                  <label className="form-label fw-bold">Status Publikasi</label>
+                  <select name="status" className="form-select" value={form.status} onChange={handleChange}>
+                    <option value="published">Publikasikan Langsung (Published)</option>
+                    <option value="draft">Simpan Sebagai Draf (Draft)</option>
+                  </select>
                 </div>
               </div>
-            </form>
-          </div>
+            </div>
+
+            {/* SEO Booster Panel */}
+            <SeoBoosterPanel form={form} onChange={handleChange} />
+
+            {/* Submit & Action Bar */}
+            <div className="d-flex justify-content-between align-items-center pt-4 mt-3">
+              <Link href="/admin/blogs" className="btn btn-outline-secondary px-4 py-2">
+                <i className="fas fa-arrow-left me-1"></i> Batal
+              </Link>
+
+              <button
+                type="submit"
+                className="btn btn-primary px-5 py-2 fw-bold shadow d-flex align-items-center gap-2"
+                disabled={submitting}
+              >
+                {submitting ? (
+                  <>
+                    <span className="spinner-border spinner-border-sm"></span> Menyimpan ke Database...
+                  </>
+                ) : (
+                  <>
+                    <i className="fas fa-paper-plane"></i> Publikasikan Artikel ke Database
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </AdminLayout>

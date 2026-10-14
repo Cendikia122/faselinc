@@ -17,6 +17,7 @@ export async function generateMetadata({ params }) {
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.faselconsulting.id";
   const cleanExcerpt = (
+    blog.meta_description ||
     blog.excerpt ||
     blog.content?.replace(/<[^>]*>?/gm, "") ||
     "Artikel & Wawasan Fasel Consulting"
@@ -25,7 +26,22 @@ export async function generateMetadata({ params }) {
     .trim()
     .slice(0, 160);
 
-  const postUrl = `${siteUrl}/blog/${blog.slug || blog.id}`;
+  const postUrl = blog.canonical_url || `${siteUrl}/blog/${blog.slug || blog.id}`;
+  const metaTitle = blog.meta_title
+    ? (blog.meta_title.toLowerCase().includes("fasel") ? blog.meta_title : `${blog.meta_title} | Fasel Consulting`)
+    : `${blog.title} | Fasel Consulting`;
+
+  const keywordsList = blog.keywords
+    ? blog.keywords.split(",").map((k) => k.trim()).filter(Boolean)
+    : [
+        blog.tags,
+        "Experiential Learning Indonesia",
+        "Leadership Development Program",
+        "Pelatihan SDM Perusahaan",
+        "Fasel Consulting",
+        "Team Building",
+      ].filter(Boolean);
+
   const imgUrl = blog.thumb?.startsWith("http")
     ? blog.thumb
     : blog.thumb?.startsWith("data:")
@@ -35,21 +51,14 @@ export async function generateMetadata({ params }) {
         : `${siteUrl}/assets/img/blog/${blog.thumb || "1.jpg"}`;
 
   return {
-    title: `${blog.title} | Fasel Consulting`,
+    title: metaTitle,
     description: cleanExcerpt,
-    keywords: [
-      blog.tags,
-      "Experiential Learning Indonesia",
-      "Leadership Development Program",
-      "Pelatihan SDM Perusahaan",
-      "Fasel Consulting",
-      "Team Building",
-    ].filter(Boolean),
+    keywords: keywordsList,
     alternates: {
       canonical: postUrl,
     },
     openGraph: {
-      title: blog.title,
+      title: metaTitle,
       description: cleanExcerpt,
       url: postUrl,
       siteName: "Fasel Consulting",
@@ -67,7 +76,7 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: "summary_large_image",
-      title: blog.title,
+      title: metaTitle,
       description: cleanExcerpt,
       images: [imgUrl],
     },
@@ -94,6 +103,7 @@ export default async function SingleBlogPage({ params }) {
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.faselconsulting.id";
   const cleanExcerpt = (
+    blog.meta_description ||
     blog.excerpt ||
     blog.content?.replace(/<[^>]*>?/gm, "") ||
     "Artikel & Wawasan Fasel Consulting"
@@ -102,7 +112,7 @@ export default async function SingleBlogPage({ params }) {
     .trim()
     .slice(0, 160);
 
-  const postUrl = `${siteUrl}/blog/${blog.slug || blog.id}`;
+  const postUrl = blog.canonical_url || `${siteUrl}/blog/${blog.slug || blog.id}`;
   const imgUrl =
     blog.thumb?.startsWith("http") || blog.thumb?.startsWith("/") || blog.thumb?.startsWith("data:")
       ? blog.thumb
@@ -117,8 +127,9 @@ export default async function SingleBlogPage({ params }) {
       {
         "@type": "BlogPosting",
         "@id": `${postUrl}#article`,
-        "headline": blog.title,
+        "headline": blog.meta_title || blog.title,
         "description": cleanExcerpt,
+        "keywords": blog.keywords || blog.tags,
         "image": [imgUrl.startsWith("http") ? imgUrl : `${siteUrl}${imgUrl}`],
         "datePublished": blog.created_at || blog.date,
         "dateModified": blog.created_at || blog.date,

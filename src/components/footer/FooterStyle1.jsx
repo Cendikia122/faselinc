@@ -114,9 +114,7 @@ const FooterStyle1 = ({ shape, shapeClass, logo, formStyle }) => {
                                         href="https://www.layanandigital.id"
                                         target="_blank"
                                         rel="noopener"
-                                        style={{ color: 'inherit', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: '2px', transition: 'opacity 0.2s' }}
-                                        onMouseEnter={e => e.target.style.opacity = '1'}
-                                        onMouseLeave={e => e.target.style.opacity = '0.85'}
+                                        style={{ color: 'inherit', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: '2px' }}
                                     >
                                         Ladi (Layanan Digital)
                                     </a>

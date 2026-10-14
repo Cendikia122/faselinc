@@ -20,6 +20,7 @@ export default async function sitemap() {
     '/blog',
     '/contact-us',
     '/team',
+    '/faq',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString(),
@@ -28,7 +29,7 @@ export default async function sitemap() {
   }));
 
   const blogRoutes = blogs.map((blog) => ({
-    url: `${baseUrl}/blog/${blog.slug || blog.id}`,
+    url: blog.canonical_url || `${baseUrl}/blog/${blog.slug || blog.id}`,
     lastModified: blog.created_at || new Date().toISOString(),
     changeFrequency: 'weekly',
     priority: 0.9,

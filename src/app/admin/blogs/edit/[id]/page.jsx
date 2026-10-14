@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import { adminFetch } from "@/lib/apiClient";
 import { compressImage } from "@/lib/imageCompressor";
+import QuillHtmlEditor from "@/components/admin/QuillHtmlEditor";
+import SeoBoosterPanel from "@/components/admin/SeoBoosterPanel";
 
 export default function EditBlogPage({ params }) {
   const { id } = params;
@@ -16,6 +18,7 @@ export default function EditBlogPage({ params }) {
 
   const [form, setForm] = useState({
     title: "",
+    slug: "",
     author: "",
     tags: "",
     date: "",
@@ -23,6 +26,10 @@ export default function EditBlogPage({ params }) {
     excerpt: "",
     content: "",
     status: "published",
+    meta_title: "",
+    meta_description: "",
+    keywords: "",
+    canonical_url: "",
   });
 
   useEffect(() => {
@@ -33,6 +40,7 @@ export default function EditBlogPage({ params }) {
         if (data.success && data.data) {
           setForm({
             title: data.data.title || "",
+            slug: data.data.slug || "",
             author: data.data.author || "",
             tags: data.data.tags || "",
             date: data.data.date || "",
@@ -40,6 +48,10 @@ export default function EditBlogPage({ params }) {
             excerpt: data.data.excerpt || "",
             content: data.data.content || "",
             status: data.data.status || "published",
+            meta_title: data.data.meta_title || "",
+            meta_description: data.data.meta_description || "",
+            keywords: data.data.keywords || data.data.tags || "",
+            canonical_url: data.data.canonical_url || "",
           });
         } else {
           toast.error(data.message || "Artikel tidak ditemukan");
@@ -55,6 +67,10 @@ export default function EditBlogPage({ params }) {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleContentChange = (contentHtml) => {
+    setForm((prev) => ({ ...prev, content: contentHtml }));
   };
 
   const handleFileUpload = async (e) => {
@@ -104,10 +120,10 @@ export default function EditBlogPage({ params }) {
       const data = await res.json();
 
       if (res.ok && data.success) {
-        toast.success("Perubahan artikel berhasil disimpan!");
+        toast.success("Artikel berhasil diperbarui di database!");
         router.push("/admin/blogs");
       } else {
-        toast.error(data.message || "Gagal menyimpan perubahan");
+        toast.error(data.message || "Gagal memperbarui artikel");
       }
     } catch (err) {
       toast.error("Terjadi kesalahan pada server");
@@ -119,21 +135,23 @@ export default function EditBlogPage({ params }) {
   if (loading) {
     return (
       <AdminLayout title="Edit Artikel Blog">
-        <div className="text-center py-5 text-muted">
-          <div className="spinner-border spinner-border-sm text-primary me-2"></div>
-          Memuat artikel...
+        <div className="text-center py-5">
+          <div className="spinner-border text-primary" role="status"></div>
+          <p className="mt-2 text-muted">Memuat data artikel...</p>
         </div>
       </AdminLayout>
     );
   }
 
   return (
-    <AdminLayout title={`Edit Artikel: ${form.title}`}>
+    <AdminLayout title={`Edit Artikel: ${form.title || "Blog"}`}>
       <div className="row justify-content-center">
         <div className="col-12 col-xl-10">
-          <div className="card border-0 shadow-sm rounded-4 bg-white p-4 p-md-5">
-            <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
+            {/* Main Content Card */}
+            <div className="card border-0 shadow-sm rounded-4 bg-white p-4 p-md-5">
               <div className="row g-4">
+                {/* Title */}
                 <div className="col-12">
                   <label className="form-label fw-bold">Judul Artikel <span className="text-danger">*</span></label>
                   <input
@@ -146,6 +164,7 @@ export default function EditBlogPage({ params }) {
                   />
                 </div>
 
+                {/* Author & Tags */}
                 <div className="col-12 col-md-6">
                   <label className="form-label fw-bold">Penulis</label>
                   <input
@@ -168,6 +187,7 @@ export default function EditBlogPage({ params }) {
                   />
                 </div>
 
+                {/* Date & Thumbnail */}
                 <div className="col-12 col-md-6">
                   <label className="form-label fw-bold">Tanggal Terbit</label>
                   <input
@@ -193,6 +213,7 @@ export default function EditBlogPage({ params }) {
                   <div className="d-flex align-items-center gap-2">
                     <input
                       type="file"
+                      id="uploadInput"
                       className="form-control form-control-sm"
                       accept="image/*"
                       onChange={handleFileUpload}
@@ -217,6 +238,7 @@ export default function EditBlogPage({ params }) {
                   )}
                 </div>
 
+                {/* Excerpt */}
                 <div className="col-12">
                   <label className="form-label fw-bold">Ringkasan Singkat (Excerpt)</label>
                   <textarea
@@ -228,42 +250,55 @@ export default function EditBlogPage({ params }) {
                   ></textarea>
                 </div>
 
+                {/* Quill + HTML + Preview Editor */}
                 <div className="col-12">
-                  <label className="form-label fw-bold">Isi Konten Artikel <span className="text-danger">*</span></label>
-                  <textarea
-                    name="content"
-                    className="form-control font-monospace"
-                    rows="12"
+                  <label className="form-label fw-bold">
+                    Isi Konten Artikel <span className="text-danger">*</span>
+                  </label>
+                  <QuillHtmlEditor
                     value={form.content}
-                    onChange={handleChange}
-                    required
-                  ></textarea>
+                    onChange={handleContentChange}
+                    placeholder="Mulai menulis artikel lengkap dengan heading, bullet points, dan kutipan..."
+                  />
                 </div>
 
-                <div className="col-12 d-flex justify-content-between align-items-center pt-3 border-top">
-                  <Link href="/admin/blogs" className="btn btn-outline-secondary">
-                    <i className="fas fa-arrow-left me-1"></i> Batal
-                  </Link>
-
-                  <button
-                    type="submit"
-                    className="btn btn-primary px-4 py-2 fw-bold shadow-sm d-flex align-items-center gap-2"
-                    disabled={submitting}
-                  >
-                    {submitting ? (
-                      <>
-                        <span className="spinner-border spinner-border-sm"></span> Menyimpan...
-                      </>
-                    ) : (
-                      <>
-                        <i className="fas fa-save"></i> Simpan Perubahan
-                      </>
-                    )}
-                  </button>
+                {/* Status */}
+                <div className="col-12 col-md-6">
+                  <label className="form-label fw-bold">Status Publikasi</label>
+                  <select name="status" className="form-select" value={form.status} onChange={handleChange}>
+                    <option value="published">Publikasikan Langsung (Published)</option>
+                    <option value="draft">Simpan Sebagai Draf (Draft)</option>
+                  </select>
                 </div>
               </div>
-            </form>
-          </div>
+            </div>
+
+            {/* SEO Booster Panel */}
+            <SeoBoosterPanel form={form} onChange={handleChange} />
+
+            {/* Submit & Action Bar */}
+            <div className="d-flex justify-content-between align-items-center pt-4 mt-3">
+              <Link href="/admin/blogs" className="btn btn-outline-secondary px-4 py-2">
+                <i className="fas fa-arrow-left me-1"></i> Batal
+              </Link>
+
+              <button
+                type="submit"
+                className="btn btn-primary px-5 py-2 fw-bold shadow d-flex align-items-center gap-2"
+                disabled={submitting}
+              >
+                {submitting ? (
+                  <>
+                    <span className="spinner-border spinner-border-sm"></span> Menyimpan Perubahan...
+                  </>
+                ) : (
+                  <>
+                    <i className="fas fa-save"></i> Simpan Perubahan ke Database
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </AdminLayout>

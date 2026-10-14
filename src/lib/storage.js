@@ -192,13 +192,17 @@ export async function getBlogByIdOrSlug(identifier) {
 
 export async function createBlog(item) {
   const baseSlug = slugify(item.title);
-  const slug = item.slug || `${baseSlug}-${Date.now().toString().slice(-4)}`;
+  const slug = item.slug ? slugify(item.slug) : `${baseSlug}-${Date.now().toString().slice(-4)}`;
   const date = item.date || new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
   const author = item.author || 'Fasel Consulting';
   const thumb = item.thumb || '1.jpg';
   const excerpt = item.excerpt || (item.content ? item.content.replace(/<[^>]*>?/gm, '').slice(0, 160) + '...' : '');
   const tags = item.tags || 'Training, Consulting';
   const status = item.status || 'published';
+  const meta_title = item.meta_title || item.title || '';
+  const meta_description = item.meta_description || excerpt || '';
+  const keywords = item.keywords || tags || '';
+  const canonical_url = item.canonical_url || `https://www.faselconsulting.id/blog/${slug}`;
 
   let newId = Date.now();
   let savedToMySQL = false;
@@ -206,9 +210,9 @@ export async function createBlog(item) {
   // 1. Simpan ke MySQL terlebih dahulu jika MySQL terhubung
   try {
     const res = await query(
-      `INSERT INTO blogs (title, slug, author, date, thumb, thumb_full, excerpt, content, tags, status) 
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [item.title, slug, author, date, thumb, thumb, excerpt, item.content, tags, status]
+      `INSERT INTO blogs (title, slug, author, date, thumb, thumb_full, excerpt, content, tags, status, meta_title, meta_description, keywords, canonical_url) 
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [item.title, slug, author, date, thumb, thumb, excerpt, item.content, tags, status, meta_title, meta_description, keywords, canonical_url]
     );
     if (res && res.insertId) {
       newId = res.insertId;
@@ -230,6 +234,10 @@ export async function createBlog(item) {
     content: item.content,
     tags,
     status,
+    meta_title,
+    meta_description,
+    keywords,
+    canonical_url,
     created_at: new Date().toISOString()
   };
 
@@ -253,6 +261,7 @@ export async function updateBlog(id, item) {
     const res = await query(
       `UPDATE blogs SET 
         title = COALESCE(?, title),
+        slug = COALESCE(?, slug),
         excerpt = COALESCE(?, excerpt),
         content = COALESCE(?, content),
         author = COALESCE(?, author),
@@ -260,9 +269,29 @@ export async function updateBlog(id, item) {
         thumb = COALESCE(?, thumb),
         thumb_full = COALESCE(?, thumb_full),
         tags = COALESCE(?, tags),
-        status = COALESCE(?, status)
+        status = COALESCE(?, status),
+        meta_title = COALESCE(?, meta_title),
+        meta_description = COALESCE(?, meta_description),
+        keywords = COALESCE(?, keywords),
+        canonical_url = COALESCE(?, canonical_url)
        WHERE id = ?`,
-      [item.title, item.excerpt, item.content, item.author, item.date, item.thumb, item.thumb, item.tags, item.status, numericId]
+      [
+        item.title,
+        item.slug ? slugify(item.slug) : item.slug,
+        item.excerpt,
+        item.content,
+        item.author,
+        item.date,
+        item.thumb,
+        item.thumb,
+        item.tags,
+        item.status,
+        item.meta_title,
+        item.meta_description,
+        item.keywords,
+        item.canonical_url,
+        numericId
+      ]
     );
     if (res && res.affectedRows > 0) {
       updatedInMySQL = true;
