@@ -24,12 +24,11 @@ export async function generateMetadata({ params }) {
   )
     .replace(/\s+/g, " ")
     .trim()
-    .slice(0, 160);
+    .slice(0, 175);
 
   const postUrl = blog.canonical_url || `${siteUrl}/blog/${blog.slug || blog.id}`;
-  const metaTitle = blog.meta_title
-    ? (blog.meta_title.toLowerCase().includes("fasel") ? blog.meta_title : `${blog.meta_title} | Fasel Consulting`)
-    : `${blog.title} | Fasel Consulting`;
+  const rawTitle = blog.meta_title || blog.title;
+  const metaTitle = rawTitle.replace(/\s*\|\s*Fasel Consulting.*$/gi, "").trim();
 
   const keywordsList = blog.keywords
     ? blog.keywords.split(",").map((k) => k.trim()).filter(Boolean)
@@ -58,7 +57,7 @@ export async function generateMetadata({ params }) {
       canonical: postUrl,
     },
     openGraph: {
-      title: metaTitle,
+      title: `${metaTitle} | Fasel Consulting`,
       description: cleanExcerpt,
       url: postUrl,
       siteName: "Fasel Consulting",
@@ -76,7 +75,7 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: "summary_large_image",
-      title: metaTitle,
+      title: `${metaTitle} | Fasel Consulting`,
       description: cleanExcerpt,
       images: [imgUrl],
     },
@@ -110,7 +109,7 @@ export default async function SingleBlogPage({ params }) {
   )
     .replace(/\s+/g, " ")
     .trim()
-    .slice(0, 160);
+    .slice(0, 175);
 
   const postUrl = blog.canonical_url || `${siteUrl}/blog/${blog.slug || blog.id}`;
   const imgUrl =
