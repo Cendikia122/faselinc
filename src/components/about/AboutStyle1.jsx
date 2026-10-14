@@ -60,7 +60,7 @@ const AboutStyle1 = () => {
                             </p>
                             <div className="owner-info">
                                 <div className="left-info">
-                                    <h4>Ardian Rangga</h4>
+                                    <div className="h4 font-weight-bold">Ardian Rangga</div>
                                     <span>CEO & Founder</span>
                                 </div>
                                 <div className="right-info">

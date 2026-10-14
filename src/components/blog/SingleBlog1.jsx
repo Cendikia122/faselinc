@@ -35,9 +35,9 @@ const SingleBlog1 = ({ blog }) => {
                             <li>{date}</li>
                         </ul>
                     </div>
-                    <h4>
+                    <h3 className="h4">
                         <Link href={targetUrl}>{title}</Link>
-                    </h4>
+                    </h3>
                     <Link href={targetUrl} className="btn-simple">
                         <i className="fas fa-angle-right"></i> {btnText || "Baca Selengkapnya"}
                     </Link>

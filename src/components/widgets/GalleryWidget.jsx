@@ -4,6 +4,7 @@ import GalleryData from '@/assets/jsonData/widgets/GalleryWidgetData.json'
 import Link from 'next/link';
 import Image from 'next/image';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const GalleryWidget = () => {
     return (

@@ -4,6 +4,7 @@ import React from 'react';
 import Project3Data from '@/assets/jsonData/project/Project3Data.json'
 import SingleProject3 from './SingleProject3';
 import { PhotoProvider } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const ProjectStyle3 = () => {
     return (

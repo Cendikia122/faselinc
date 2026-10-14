@@ -35,7 +35,7 @@ const BlogStyle1 = ({ sectionClass, initialBlogs = [] }) => {
                 <div className="row">
                     <div className="col-lg-8 offset-lg-2">
                         <div className="site-heading text-center">
-                            <h4 className="sub-heading">Wawasan & Berita</h4>
+                            <div className="sub-heading h4">Wawasan & Berita</div>
                             <h2 className="title">Artikel & Inspirasi Terkini</h2>
                             <div className="devider"></div>
                         </div>

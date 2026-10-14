@@ -18,13 +18,13 @@ const ChooseStyle1 = () => {
                                 <h2 className="title mb-35">Our vision and mission!</h2>
                                 <ul className="list-item">
                                     <li className="wow fadeInUp">
-                                        <h4>Our vision</h4>
+                                        <h3 className="h4">Our vision</h3>
                                         <p>
                                         Our mission is to provide high-quality and innovative soft skills training services to help individuals and companies achieve their career goals and enhance the skills of their employees
                                         </p>
                                     </li>
                                     <li className="wow fadeInUp" data-wow-delay="300ms">
-                                        <h4>Our mission</h4>
+                                        <h3 className="h4">Our mission</h3>
                                         <p>
                                         Our mission is to provide high-quality and innovative soft skills training services to help individuals and companies achieve their career goals and enhance the skills of their employees
                                         </p>

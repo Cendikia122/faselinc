@@ -15,7 +15,7 @@ const SingleBanner3 = ({ banner, isPriority = false }) => {
                     fill
                     priority={isPriority}
                     fetchPriority={isPriority ? "high" : "low"}
-                    sizes="(max-width: 768px) 100vw, 55vw"
+                    sizes="(max-width: 768px) 55vw, (max-width: 1200px) 55vw, 50vw"
                     style={{ objectFit: 'cover' }}
                     quality={75}
                 />

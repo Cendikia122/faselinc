@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import ModalVideo from 'react-modal-video';
+import 'react-modal-video/css/modal-video.css';
 
 const SingleBanner5 = ({ banner }) => {
     const { thumb, subTitle, title1, title2, btnText, shape, videoId } = banner

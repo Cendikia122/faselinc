@@ -11,7 +11,7 @@ const SingleProcess1 = ({ process }) => {
                     <Image src={`/assets/img/about/${thumb}`} width={800} height={800} alt="Thumb" />
                     <span>{steps}</span>
                 </div>
-                <h4>{title}</h4>
+                <h3 className="h4">{title}</h3>
                 <p>{text}</p>
             </div>
         </>

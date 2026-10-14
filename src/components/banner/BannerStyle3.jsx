@@ -86,7 +86,7 @@ const BannerStyle3 = () => {
                             }}
                         >
                             {Banner3Data.map((banner, index) =>
-                                <SwiperSlide key={banner.id} className='banner-style-three'>
+                                <SwiperSlide key={banner.id} className={`banner-style-three ${index === 0 ? 'swiper-slide-active' : ''}`}>
                                     <SingleBanner3 banner={banner} isPriority={index === 0} />
                                 </SwiperSlide>
                             )}

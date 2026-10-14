@@ -1,0 +1,64 @@
+{
+  "@context": "https://schema.org",
+  "@type": "AICatalog",
+  "name": "Fasel Consulting AI Capabilities",
+  "description": "Katalog resmi layanan pelatihan kepemimpinan, experiential learning, dan corporate training Fasel Consulting.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Fasel Consulting",
+    "url": "https://www.faselconsulting.id"
+  },
+  "entries": [
+    {
+      "@type": "AgenticResource",
+      "name": "Experiential Learning Indonesia",
+      "description": "Metode pembelajaran berbasis pengalaman langsung untuk mengembangkan kompetensi karyawan dan budaya perusahaan.",
+      "mediaType": "text/markdown",
+      "url": "https://www.faselconsulting.id/llms.txt",
+      "representativeQueries": [
+        "cari vendor experiential learning indonesia",
+        "pelatihan sdm berbasis experiential learning",
+        "corporate outbound dan team building"
+      ],
+      "tags": [
+        "experiential-learning",
+        "corporate-training",
+        "sdm"
+      ]
+    },
+    {
+      "@type": "AgenticResource",
+      "name": "Leadership Development Program",
+      "description": "Program akselerasi kepemimpinan intensif untuk melahirkan calon pemimpin tangguh dan solutif.",
+      "mediaType": "text/markdown",
+      "url": "https://www.faselconsulting.id/services",
+      "representativeQueries": [
+        "pelatihan kepemimpinan perusahaan",
+        "program leadership development korporasi",
+        "konsultan kepemimpinan eksekutif"
+      ],
+      "tags": [
+        "leadership",
+        "training",
+        "manajemen"
+      ]
+    },
+    {
+      "@type": "AgenticResource",
+      "name": "Corporate Team Building",
+      "description": "Aktivitas kolaboratif untuk mempererat sinergi, engagement, kepercayaan, dan komunikasi antar departemen.",
+      "mediaType": "text/markdown",
+      "url": "https://www.faselconsulting.id/events",
+      "representativeQueries": [
+        "team building perusahaan bogor jakarta",
+        "outbound corporate training",
+        "fasilitator gathering perusahaan"
+      ],
+      "tags": [
+        "team-building",
+        "gathering",
+        "collaboration"
+      ]
+    }
+  ]
+}

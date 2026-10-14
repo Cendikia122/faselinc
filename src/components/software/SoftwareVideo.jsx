@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import ModalVideo from 'react-modal-video';
+import 'react-modal-video/css/modal-video.css';
 
 const SoftwareVideo = () => {
     const [isOpen, setOpen] = useState(false);

@@ -26,7 +26,7 @@ const PartnerStyle1 = ({ sectionClass }) => {
                         <div className="col-lg-5">
                             <div className="partner-map" style={{ backgroundImage: `url(/assets/img/shape/map.png)` }}>
                                 <h2 className="mask-text" style={{ backgroundImage: `url(/assets/img/banner/faselnum.jpg)` }}>80</h2>
-                                <h4>Partners in world wide</h4>
+                                <div className="h4 font-weight-bold">Partners in world wide</div>
                             </div>
                         </div>
                         <div className="col-lg-6 offset-lg-1">

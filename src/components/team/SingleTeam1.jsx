@@ -19,7 +19,7 @@ const SingleTeam1 = ({ team }) => {
                 </div>
                 <div className="info">
                     <span>{designation}</span>
-                    <h4><Link href={`/team-details/${id}`}>{name}</Link></h4>
+                    <h3 className="h4"><Link href={`/team-details/${id}`}>{name}</Link></h3>
                 </div>
             </div>
         </>

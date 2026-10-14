@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react';
+import '@/assets/css/nice-select.css';
 
 const CustomSelect = ({ options, selectValue }) => {
 

@@ -1,17 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'swiper/css';
 import 'swiper/css/bundle';
-import 'react-modal-video/css/modal-video.css';
 import 'react-toastify/dist/ReactToastify.css';
-import 'react-photo-view/dist/react-photo-view.css';
-import 'react-circular-progressbar/dist/styles.css';
-import 'rc-slider/assets/index.css';
 
 import '@/assets/css/animate.css';
-import '@/assets/css/font-awesome.min.css';
-import '@/assets/css/flaticon-set.css';
-
-import '@/assets/css/nice-select.css';
 import '@/assets/css/validnavs.css';
 import '@/assets/css/helper.css';
 import '@/assets/css/unit-test.css';
@@ -55,6 +46,7 @@ export const metadata = {
     canonical: "https://www.faselconsulting.id",
     types: {
       "text/markdown": "https://www.faselconsulting.id/llms.txt",
+      "application/json": "https://www.faselconsulting.id/.well-known/ai-catalog.json",
     },
   },
   verification: {
@@ -101,6 +93,22 @@ export default function RootLayout({ children }) {
   const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-XXXXXXXXXX';
   return (
     <html lang="id">
+      <head>
+        <link rel="ai-catalog" href="https://www.faselconsulting.id/.well-known/ai-catalog.json" />
+        <link rel="preload" href="/assets/css/font-awesome.min.css" as="style" />
+        <link rel="preload" href="/assets/css/flaticon-set.css" as="style" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){['/assets/css/font-awesome.min.css','/assets/css/flaticon-set.css'].forEach(function(u){var l=document.createElement('link');l.rel='stylesheet';l.href=u;document.head.appendChild(l);});})();`,
+          }}
+        />
+        <noscript>
+          {/* eslint-disable @next/next/no-css-tags */}
+          <link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
+          <link rel="stylesheet" href="/assets/css/flaticon-set.css" />
+          {/* eslint-enable @next/next/no-css-tags */}
+        </noscript>
+      </head>
       <body className={`${outfit.className} ${manrope.className}`}>
         {/* ✅ Google Analytics GA4 — lazyOnload to protect TBT and FCP */}
         <Script

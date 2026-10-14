@@ -19,7 +19,7 @@ const SingleTestimonial1 = ({ testimonial }) => {
                         <div className="provider">
                             <i className="flaticon-quote"></i>
                             <div className="info">
-                                <h4>{name}</h4>
+                                <div className="h4 font-weight-bold">{name}</div>
                                 <span>{designation}</span>
                             </div>
                         </div>

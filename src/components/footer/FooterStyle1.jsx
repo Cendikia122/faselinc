@@ -31,7 +31,7 @@ const FooterStyle1 = ({ shape, shapeClass, logo, formStyle }) => {
                                     🚀 Ready to take your team to the next level with FASEL.inc? Let’s create an unforgettable and impactful experience!
                                     </p>
                                     <div className="opening-hours">
-                                        <h5>Service Hours</h5>
+                                        <div className="h5 font-weight-bold">Service Hours</div>
                                         <ul>
                                             <li>
                                                 <div className="working-day">Monday – Saturday:</div>
@@ -49,7 +49,7 @@ const FooterStyle1 = ({ shape, shapeClass, logo, formStyle }) => {
                             </div>
                             <div className="col-lg-2 col-md-6 footer-item">
                                 <div className="f-item link">
-                                    <h4 className="widget-title">Our Company</h4>
+                                    <div className="widget-title h4">Our Company</div>
                                     <ul>
                                         <li>
                                             <Link href="/about-us">Company Profile</Link>
@@ -68,7 +68,7 @@ const FooterStyle1 = ({ shape, shapeClass, logo, formStyle }) => {
                             </div>
                             <div className="col-lg-2 col-md-6 footer-item">
                                 <div className="f-item link">
-                                    <h4 className="widget-title">Our Services</h4>
+                                    <div className="widget-title h4">Our Services</div>
                                     <ul>
                                         <li>
                                             <Link href="/services">Training</Link>
@@ -89,7 +89,7 @@ const FooterStyle1 = ({ shape, shapeClass, logo, formStyle }) => {
                                 </div>
                             </div>
                             <div className="col-lg-4 col-md-6 footer-item">
-                                <h4 className="widget-title">Newsletter</h4>
+                                <div className="widget-title h4">Newsletter</div>
                                 <p>
                                     Join our subscribers list to get the latest <br /> news and special offers.
                                 </p>

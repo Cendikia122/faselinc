@@ -31,7 +31,7 @@ const ProjectStyle1 = ({ initialEvents = [] }) => {
                         <div className="row">
                             <div className="col-lg-6">
                                 <div className="content-left">
-                                    <h5 className="sub-heading">Pelatihan & Event</h5>
+                                    <div className="sub-heading h5">Pelatihan & Event</div>
                                     <h2 className="heading">Program Pelatihan Unggulan Fasel Consulting</h2>
                                 </div>
                             </div>

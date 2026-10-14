@@ -220,5 +220,52 @@ nav.navbar img.fasel-brand-img {
         top: 0 !important;
         position: fixed !important;
     }
+/* ==========================================================================
+   PageSpeed & Accessibility Optimizations (Touch Targets & SSR LCP Banner)
+   ========================================================================== */
+.footer-social li a {
+    min-width: 48px !important;
+    min-height: 48px !important;
+    line-height: 48px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.footer-bottom .text-end li a {
+    display: inline-block !important;
+    padding: 12px 10px !important;
+    min-height: 48px !important;
+    line-height: 24px !important;
+}
+
+.btn-simple {
+    min-height: 48px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 10px 0 !important;
+}
+
+/* Ensure SSR banner image is immediately visible (eliminates LCP hydration delay) */
+.banner-area .swiper-slide:first-child,
+.banner-area .swiper-slide:first-of-type,
+.banner-style-three:first-child {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    z-index: 1 !important;
+}
+
+.banner-area .swiper-slide:first-child .banner-thumb {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Eliminate non-composited 10s slow transition on initial mobile render */
+@media (max-width: 768px) {
+    .banner-area.zoom-effect .banner-thumb {
+        transition: none !important;
+        transform: none !important;
+    }
 }
 

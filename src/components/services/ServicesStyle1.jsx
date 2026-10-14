@@ -16,7 +16,7 @@ const ServicesStyle1 = () => {
           <div className="row align-center">
             <div className="col-lg-5 mb-md-60">
               <div className="service-nav-info">
-                <h4 className="sub-title">What we do</h4>
+                <div className="sub-title h4">What we do</div>
                 <h2>Excellent service and support for you</h2>
                 <div className="nav nav-tabs service-tab-navs" id="nav-tab" role="tablist">
                   <button className="nav-link active" id="nav-id-1" data-bs-toggle="tab" data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1" aria-selected="true">
