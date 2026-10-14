@@ -108,30 +108,72 @@ export default async function SingleBlogPage({ params }) {
       ? blog.thumb
       : `/assets/img/blog/${blog.thumb || "1.jpg"}`;
 
+  const wordCount = (blog.content || "").replace(/<[^>]*>?/gm, "").split(/\s+/).length;
+  const readTimeMinutes = Math.max(1, Math.ceil(wordCount / 200));
+
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: blog.title,
-    description: cleanExcerpt,
-    image: [imgUrl.startsWith("http") ? imgUrl : `${siteUrl}${imgUrl}`],
-    datePublished: blog.created_at || blog.date,
-    dateModified: blog.created_at || blog.date,
-    author: {
-      "@type": "Person",
-      name: blog.author || "Fasel Consulting",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Fasel Consulting",
-      logo: {
-        "@type": "ImageObject",
-        url: `${siteUrl}/assets/img/logo/fasellogo.png`,
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${postUrl}#article`,
+        "headline": blog.title,
+        "description": cleanExcerpt,
+        "image": [imgUrl.startsWith("http") ? imgUrl : `${siteUrl}${imgUrl}`],
+        "datePublished": blog.created_at || blog.date,
+        "dateModified": blog.created_at || blog.date,
+        "inLanguage": "id-ID",
+        "wordCount": wordCount,
+        "timeRequired": `PT${readTimeMinutes}M`,
+        "author": {
+          "@type": "Person",
+          "name": blog.author || "Ardian Rangga",
+          "jobTitle": "Master Trainer & Founder",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Fasel Consulting",
+            "url": siteUrl,
+          },
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Fasel Consulting",
+          "url": siteUrl,
+          "logo": {
+            "@type": "ImageObject",
+            "url": `${siteUrl}/assets/img/fasellogo.png`,
+          },
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": postUrl,
+        },
       },
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": postUrl,
-    },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${postUrl}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Beranda",
+            "item": siteUrl,
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog & Wawasan",
+            "item": `${siteUrl}/blog`,
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": blog.title,
+            "item": postUrl,
+          },
+        ],
+      },
+    ],
   };
 
   const waShareLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(
@@ -201,6 +243,10 @@ export default async function SingleBlogPage({ params }) {
                         <li className="d-flex align-items-center gap-2">
                           <i className="far fa-user-circle text-primary"></i>
                           <span>{blog.author || "Fasel Consulting"}</span>
+                        </li>
+                        <li className="d-flex align-items-center gap-2">
+                          <i className="far fa-clock text-primary"></i>
+                          <span>{readTimeMinutes} menit baca</span>
                         </li>
                         {blog.tags && (
                           <li className="d-flex align-items-center gap-2">

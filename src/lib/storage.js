@@ -152,7 +152,7 @@ export async function getBlogs(limit = null, all = false) {
       : 'SELECT * FROM blogs WHERE status = "published" OR status IS NULL OR status = "" ORDER BY id DESC';
     if (limit) sql += ` LIMIT ${limit}`;
     const rows = await query(sql);
-    if (Array.isArray(rows)) {
+    if (Array.isArray(rows) && rows.length > 0) {
       return { source: 'mysql', data: rows };
     }
   } catch (dbErr) {

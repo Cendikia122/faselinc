@@ -5,9 +5,9 @@
         "btnClass": "",
         "collapseTarget": "collapseOne",
         "expanded": "true",
-        "title": "Where can I get analytics help?",
+        "title": "Apa itu metode Experiential Learning dan apa keunggulannya?",
         "textClass": "show",
-        "text": "Bennings appetite disposed me an at subjects an. To no indulgence diminution so discovered mr apartments. Are off under folly death wrote cause her way spite. Plan upon yet way get cold spot its week. Almost do am or limits hearts. Resolve parties but why she shewing. She sang know now minute exact dear open to reaching out."
+        "text": "Experiential Learning adalah metodologi pembelajaran berbasis pengalaman langsung di mana peserta mengalami simulasi atau tantangan nyata, merefleksikan prosesnya, mengonseptualisasi insight, dan menerapkannya dalam pekerjaan sehari-hari. Berbeda dengan seminar satu arah, metode ini terbukti meningkatkan retensi pemahaman hingga 80% dan mendorong perubahan perilaku nyata di lingkungan kerja."
     },
     {
         "id": 2,
@@ -15,9 +15,9 @@
         "btnClass": "collapsed",
         "collapseTarget": "collapseTwo",
         "expanded": "false",
-        "title": "How much does data analytics costs?",
+        "title": "Program apa saja yang disediakan oleh Fasel Consulting?",
         "textClass": "",
-        "text": "Cennings appetite disposed me an at subjects an. To no indulgence diminution so discovered mr apartments. Are off under folly death wrote cause her way spite. Plan upon yet way get cold spot its week. Almost do am or limits hearts. Resolve parties but why she shewing. She sang know now minute exact dear open to reaching out."
+        "text": "Fasel Consulting menyediakan program komprehensif mencakup Leadership Development Program (LDP), Corporate Team Building & Outbound, Experiential Learning Camp, Public Speaking & Communication Mastery, Creative Problem Solving, serta Konsultasi Pengembangan SDM & Budaya Organisasi."
     },
     {
         "id": 3,
@@ -25,9 +25,9 @@
         "btnClass": "collapsed",
         "collapseTarget": "collapseThree",
         "expanded": "false",
-        "title": "What kind of data is needed for analysis?",
+        "title": "Apakah program dapat disesuaikan (customized) dengan kebutuhan perusahaan kami?",
         "textClass": "",
-        "text": "Tennings appetite disposed me an at subjects an. To no indulgence diminution so discovered mr apartments. Are off under folly death wrote cause her way spite. Plan upon yet way get cold spot its week. Almost do am or limits hearts. Resolve parties but why she shewing. She sang know now minute exact dear open to reaching out."
+        "text": "Ya, tentu saja. Setiap program Fasel Consulting diawali dengan proses Training Needs Analysis (TNA). Kami berdiskusi mendalam dengan tim manajemen/HRD Anda untuk merumuskan tujuan spesifik, tantangan tim yang dihadapi, serta menyusun skenario pelatihan yang paling relevan dengan industri perusahaan Anda."
     },
     {
         "id": 4,
@@ -35,8 +35,18 @@
         "btnClass": "collapsed",
         "collapseTarget": "collapseFour",
         "expanded": "false",
-        "title": "What kind of data is needed for analysis?",
+        "title": "Di mana lokasi pelaksanaan pelatihan dan berapa durasi idealnya?",
         "textClass": "",
-        "text": "Tennings appetite disposed me an at subjects an. To no indulgence diminution so discovered mr apartments. Are off under folly death wrote cause her way spite. Plan upon yet way get cold spot its week. Almost do am or limits hearts. Resolve parties but why she shewing. She sang know now minute exact dear open to reaching out."
+        "text": "Pelatihan dapat dilaksanakan secara In-House di kantor perusahaan, di hotel/resor pilihan Anda di seluruh Indonesia (seperti Bogor, Puncak, Bandung, Bali, Yogyakarta), maupun di lokasi alam terbuka untuk program camp. Durasi program fleksibel mulai dari 1 hari intensif hingga 3 hari 2 malam untuk leadership camp."
+    },
+    {
+        "id": 5,
+        "headingId": "headingFive",
+        "btnClass": "collapsed",
+        "collapseTarget": "collapseFive",
+        "expanded": "false",
+        "title": "Bagaimana cara berkonsultasi dan mendapatkan proposal penawaran?",
+        "textClass": "",
+        "text": "Anda dapat langsung menghubungi kami melalui WhatsApp resmi di +62 812-9831-9944 atau mengisi formulir di halaman Kontak Kami. Tim konsultan kami akan segera merespons dalam waktu 1x24 jam untuk menjadwalkan sesi konsultasi gratis dan menyusun proposal program yang sesuai."
     }
 ]

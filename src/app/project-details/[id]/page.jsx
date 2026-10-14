@@ -109,21 +109,48 @@ export default async function ProjectDetailsPage({ params }) {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Course",
-    name: event.title,
-    description: cleanExcerpt,
-    provider: {
-      "@type": "Organization",
-      name: "Fasel Consulting",
-      url: siteUrl,
-    },
-    image: [imgUrl.startsWith("http") ? imgUrl : `${siteUrl}${imgUrl}`],
-    offers: {
-      "@type": "Offer",
-      category: event.tag || "Corporate Training",
-      url: postUrl,
-      availability: "https://schema.org/InStock",
-    },
+    "@graph": [
+      {
+        "@type": "Course",
+        name: event.title,
+        description: cleanExcerpt,
+        provider: {
+          "@type": "Organization",
+          name: "Fasel Consulting",
+          url: siteUrl,
+        },
+        image: [imgUrl.startsWith("http") ? imgUrl : `${siteUrl}${imgUrl}`],
+        offers: {
+          "@type": "Offer",
+          category: event.tag || "Corporate Training",
+          url: postUrl,
+          availability: "https://schema.org/InStock",
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Beranda",
+            "item": siteUrl,
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Pelatihan & Event",
+            "item": `${siteUrl}/events`,
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": event.title,
+            "item": postUrl,
+          },
+        ],
+      },
+    ],
   };
 
   return (
