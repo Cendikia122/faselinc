@@ -92,8 +92,8 @@ const BannerStyle3 = () => {
                             )}
                         </Swiper>
                     </div>
-                    <div className="swiper-button-prev"></div>
-                    <div className="swiper-button-next"></div>
+                    <div className="swiper-button-prev" role="button" aria-label="Slide Sebelumnya" tabIndex={0}></div>
+                    <div className="swiper-button-next" role="button" aria-label="Slide Berikutnya" tabIndex={0}></div>
                 </div>
             </div>
         </>

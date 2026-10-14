@@ -32,12 +32,13 @@ const FooterNewsLetter = () => {
                 placeholder="Your Email"
                 className="form-control"
                 name="email"
+                aria-label="Alamat Email untuk Berlangganan Newsletter"
                 autoComplete="off"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
-            <button type="submit">Subscribe</button>
+            <button type="submit" aria-label="Berlangganan Newsletter">Subscribe</button>
         </form>
     );
 };

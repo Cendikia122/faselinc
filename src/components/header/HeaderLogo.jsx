@@ -7,7 +7,7 @@ import Link from 'next/link';
 const HeaderLogo = ({ openMenu }) => {
     return (
         <div className="navbar-header fasel-logo-wrapper">
-            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu" onClick={openMenu}>
+            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu" onClick={openMenu} aria-label="Buka Menu Navigasi">
                 <i className="fa fa-bars"></i>
             </button>
             <Link className="navbar-brand" href="/" style={{ padding: '0', margin: '0', display: 'flex', alignItems: 'center' }}>

@@ -6,7 +6,7 @@ const ChooseStyle1 = () => {
     return (
         <>
             <div className="choose-us-style-one-area default-padding text-light">
-                <div className="cover-bg" style={{ backgroundImage: `url(/assets/img/banner/faselvision.png)` }}></div>
+                <div className="cover-bg" style={{ backgroundImage: `url(/assets/img/banner/faselvision.jpg)` }}></div>
                 <div className="shape-left-top">
                     <Image src={shape17} alt="Shape" />
                 </div>

@@ -7,7 +7,9 @@ const LayoutStyle1 = ({ children }) => {
         <>
             <div className="wrapper">
                 <HeaderStyle1 />
-                {children}
+                <main id="main-content">
+                    {children}
+                </main>
                 <FooterStyle1 />
             </div>
         </>

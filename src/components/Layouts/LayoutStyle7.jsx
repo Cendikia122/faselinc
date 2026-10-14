@@ -7,8 +7,10 @@ const LayoutStyle7 = ({ children, breadCrumb, title }) => {
     return (
         <>
             <HeaderStyle7 />
-            {breadCrumb && <BreadCrumb breadCrumb={breadCrumb} title={title} />}
-            {children}
+            <main id="main-content">
+                {breadCrumb && <BreadCrumb breadCrumb={breadCrumb} title={title} />}
+                {children}
+            </main>
             <FooterStyle1 />
         </>
     );

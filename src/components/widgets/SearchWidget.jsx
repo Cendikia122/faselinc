@@ -13,8 +13,8 @@ const SearchWidget = () => {
             <div className="sidebar-item search">
                 <div className="sidebar-info">
                     <form onSubmit={handleSearch}>
-                        <input type="text" placeholder="Enter Keyword" name="text" className="form-control" />
-                        <button type="submit"><i className="fas fa-search"></i></button>
+                        <input type="text" placeholder="Enter Keyword" name="text" className="form-control" aria-label="Kata kunci pencarian" />
+                        <button type="submit" aria-label="Cari artikel"><i className="fas fa-search"></i></button>
                     </form>
                 </div>
             </div>

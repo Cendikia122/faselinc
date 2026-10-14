@@ -4085,7 +4085,8 @@ p {
 	width: auto;
 }
 
-.banner-style-three .content h4 {
+.banner-style-three .content h4,
+.banner-style-three .content .sub-title {
 	text-transform: uppercase;
 	font-weight: 500;
 	color: var(--color-secondary);

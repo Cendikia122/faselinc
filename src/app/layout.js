@@ -53,6 +53,9 @@ export const metadata = {
   ],
   alternates: {
     canonical: "https://www.faselconsulting.id",
+    types: {
+      "text/markdown": "https://www.faselconsulting.id/llms.txt",
+    },
   },
   verification: {
     google: "google1527a016f64f71ff",
@@ -99,12 +102,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="id">
       <body className={`${outfit.className} ${manrope.className}`}>
-        {/* ✅ Google Analytics GA4 — fix "Google Analytics Not Found" error */}
+        {/* ✅ Google Analytics GA4 — lazyOnload to protect TBT and FCP */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="ga4-init" strategy="afterInteractive">
+        <Script id="ga4-init" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -113,8 +116,8 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
-        {/* Meta Pixel - Facebook Ads */}
-        <Script id="fb-pixel-init" strategy="afterInteractive">
+        {/* Meta Pixel - Facebook Ads — lazyOnload */}
+        <Script id="fb-pixel-init" strategy="lazyOnload">
           {`!function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};

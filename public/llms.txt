@@ -1,0 +1,17 @@
+# Fasel Consulting
+
+> Fasel Consulting adalah konsultan dan penyedia layanan Experiential Learning Indonesia, Pelatihan Kepemimpinan (Leadership Development Program), dan Corporate Team Building terbaik di Indonesia.
+
+## Layanan Utama
+
+- [Experiential Learning Indonesia](https://www.faselconsulting.id/services): Program pembelajaran interaktif berbasis pengalaman nyata untuk transformasi SDM perusahaan.
+- [Leadership Development Program](https://www.faselconsulting.id/services): Pembentukan karakter dan kompetensi kepemimpinan bagi calon eksekutif dan manajer.
+- [Team Building & Capacity Building](https://www.faselconsulting.id/services): Simulasi kolaborasi dan pemecahan masalah untuk meningkatkan kohesi tim.
+- [In-House Training & Outbound](https://www.faselconsulting.id/events): Program pelatihan custom yang disesuaikan dengan kebutuhan spesifik korporasi.
+
+## Informasi & Artikel
+
+- [Tentang Kami](https://www.faselconsulting.id/about-us): Profil Fasel Consulting, visi misi, dan para fasilitator Master Trainer BNSP.
+- [Artikel & Wawasan](https://www.faselconsulting.id/blog): Riset, panduan, dan wawasan terkini pengembangan kepemimpinan dan SDM.
+- [FAQ](https://www.faselconsulting.id/faq): Pertanyaan umum mengenai konsultasi dan penyelenggaraan program.
+- [Kontak & Konsultasi](https://www.faselconsulting.id/contact-us): Informasi kontak resmi, WhatsApp (+6281298319944), dan lokasi kantor di Bogor.

@@ -27,7 +27,7 @@ const MainHeaderStyle1 = () => {
                         {/* Menu Navigasi Tengah (1 Baris Rata, Compact, Anti Numpuk) */}
                         <div className={`collapse navbar-collapse collapse-mobile fasel-nav-menu-wrap ${isOpen ? "show" : ""}`} id="navbar-menu">
                             <Image src={logo} alt="Logo Fasel Consulting" className="fasel-drawer-logo" />
-                            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu" onClick={closeMenu}>
+                            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu" onClick={closeMenu} aria-label="Tutup Menu Navigasi">
                                 <i className="fa fa-times"></i>
                             </button>
                             <MainMenu navbarPlacement="navbar-center" isOpen={isOpen} closeMenu={closeMenu} toggleSubMenu={toggleSubMenu} />

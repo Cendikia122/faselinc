@@ -8,23 +8,23 @@ const SingleBanner3 = ({ banner, isPriority = false }) => {
 
     return (
         <>
-            {/* ✅ Preload LCP image untuk banner pertama */}
-            {isPriority && (
-                <link
-                    rel="preload"
-                    as="image"
-                    href={`/assets/img/banner/${bgThumb}`}
+            <div className="banner-thumb bg-cover" style={{ overflow: 'hidden' }}>
+                <Image
+                    src={`/assets/img/banner/${bgThumb}`}
+                    alt={title || "Pelatihan Kepemimpinan Fasel Consulting"}
+                    fill
+                    priority={isPriority}
+                    fetchPriority={isPriority ? "high" : "low"}
+                    sizes="(max-width: 768px) 100vw, 55vw"
+                    style={{ objectFit: 'cover' }}
+                    quality={75}
                 />
-            )}
-            <div
-                className="banner-thumb bg-cover"
-                style={{ background: `url(/assets/img/banner/${bgThumb}) center/cover no-repeat` }}
-            />
+            </div>
             <div className="container">
                 <div className="row align-center">
                     <div className="col-xl-6 col-lg-7 col-md-10">
                         <div className="content">
-                            <h4>{subTitle}</h4>
+                            <div className="sub-title h4">{subTitle}</div>
                             {isPriority ? (
                                 <h1>{title}</h1>
                             ) : (

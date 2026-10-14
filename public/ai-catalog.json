@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "Fasel Consulting",
+  "description": "Katalog resmi layanan pelatihan kepemimpinan, experiential learning, dan corporate training Fasel Consulting.",
+  "url": "https://www.faselconsulting.id",
+  "contact": {
+    "email": "faselconsulting@gmail.com",
+    "phone": "+6281298319944"
+  },
+  "services": [
+    {
+      "id": "experiential-learning",
+      "name": "Experiential Learning Indonesia",
+      "description": "Metode pembelajaran berbasis pengalaman langsung untuk mengembangkan kompetensi karyawan dan budaya perusahaan.",
+      "url": "https://www.faselconsulting.id/services"
+    },
+    {
+      "id": "leadership-development",
+      "name": "Leadership Development Program",
+      "description": "Program akselerasi kepemimpinan intensif untuk melahirkan calon pemimpin tangguh dan solutif.",
+      "url": "https://www.faselconsulting.id/services"
+    },
+    {
+      "id": "team-building",
+      "name": "Corporate Team Building",
+      "description": "Aktivitas kolaboratif untuk mempererat engagement, kepercayaan, dan komunikasi antar departemen.",
+      "url": "https://www.faselconsulting.id/events"
+    }
+  ]
+}
