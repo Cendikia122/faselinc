@@ -133,6 +133,9 @@ fbq('track', 'PageView');`}
         {/* Fallback for no-JS */}
         <noscript>
           <img height="1" width="1" style={{display:'none'}}
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
             src="https://www.facebook.com/tr?id=1396576578921257&ev=PageView&noscript=1"
             alt="" />
         </noscript>

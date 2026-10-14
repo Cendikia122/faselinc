@@ -126,6 +126,15 @@ const Home1 = async () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {/* 🚀 Preload LCP Image untuk PageSpeed Insights Mobile */}
+      <link
+        rel="preload"
+        as="image"
+        href="/_next/image?url=%2Fassets%2Fimg%2Fbanner%2Fbanner1.jpg&w=1200&q=75"
+        imageSrcSet="/_next/image?url=%2Fassets%2Fimg%2Fbanner%2Fbanner1.jpg&w=640&q=75 640w, /_next/image?url=%2Fassets%2Fimg%2Fbanner%2Fbanner1.jpg&w=750&q=75 750w, /_next/image?url=%2Fassets%2Fimg%2Fbanner%2Fbanner1.jpg&w=1080&q=75 1080w, /_next/image?url=%2Fassets%2Fimg%2Fbanner%2Fbanner1.jpg&w=1200&q=75 1200w"
+        imageSizes="(max-width: 768px) 100vw, 55vw"
+        fetchPriority="high"
+      />
       <BannerStyle1 />
       <AboutStyle1 />
       <ServicesStyle1 />
